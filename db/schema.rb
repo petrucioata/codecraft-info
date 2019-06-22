@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_22_174419) do
+ActiveRecord::Schema.define(version: 2019_06_22_190707) do
 
   create_table "editions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(version: 2019_06_22_174419) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "solutions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "participation_id"
+    t.bigint "task_id"
+    t.integer "points", default: 0
+    t.string "time", default: "00:00:00"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["participation_id"], name: "index_solutions_on_participation_id"
+    t.index ["task_id"], name: "index_solutions_on_task_id"
+  end
+
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "author"
@@ -65,5 +76,7 @@ ActiveRecord::Schema.define(version: 2019_06_22_174419) do
   add_foreign_key "participants", "positions"
   add_foreign_key "participations", "editions"
   add_foreign_key "participations", "participants"
+  add_foreign_key "solutions", "participations"
+  add_foreign_key "solutions", "tasks"
   add_foreign_key "tasks", "editions"
 end
