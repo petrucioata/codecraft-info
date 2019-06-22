@@ -3,4 +3,6 @@ class Participant < ApplicationRecord
 
   has_many :participations
   has_many :editions, through: :participations
+
+  validates_uniqueness_of :username
 end
