@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_22_163202) do
+ActiveRecord::Schema.define(version: 2019_06_22_163837) do
 
   create_table "editions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 2019_06_22_163202) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "participants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "username"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "link"
+    t.bigint "position_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["position_id"], name: "index_participants_on_position_id"
+  end
+
   create_table "positions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "short_name"
     t.string "long_name"
@@ -30,4 +41,5 @@ ActiveRecord::Schema.define(version: 2019_06_22_163202) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "participants", "positions"
 end
