@@ -32,3 +32,6 @@
 
 # Ignore local environments files
 /config/local_env.yml
+
+# Ignore coverage folder
+coverage/*
