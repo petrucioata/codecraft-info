@@ -1,0 +1,20 @@
+<h1>CodeCraft editions</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Topic</th>
+    <th>Date</th>
+    <th>No.participants</th>
+    <th>View</th>
+  </tr>
+  <% @editions.each do |edition| %>
+    <tr>
+      <td><%= link_to edition.name, edition.link, target: "_blank" %></td>
+      <td><%= edition.topic %></td>
+      <td><%= romanian_date(edition.date) %></td>
+      <td><%= edition.participants.size %></td>
+      <td><%= link_to "Show", edition_path(edition.id) %></td>
+    </tr>
+  <% end %>
+</table>
