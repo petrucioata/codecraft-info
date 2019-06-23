@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 2019_06_22_190707) do
   create_table "participations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "participant_id"
     t.bigint "edition_id"
-    t.integer "total_points"
-    t.string "total_time"
+    t.integer "total_points", default: 0
+    t.string "total_time", default: "00:00:00"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["edition_id"], name: "index_participations_on_edition_id"
