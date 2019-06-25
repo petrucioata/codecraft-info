@@ -5,3 +5,6 @@ Topic: <%= @edition.topic %> <br>
 Date: <%= romanian_format(@edition.date) %>
 <hr>
 <p><%= @edition.description %></p>
+
+<%= link_to "Edit", edit_edition_path(@edition) %>
+<%= link_to "Editions", editions_path %>

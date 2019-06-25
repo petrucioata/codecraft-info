@@ -6,7 +6,7 @@
     <th>Topic</th>
     <th>Date</th>
     <th>No.participants</th>
-    <th>View</th>
+    <th>Actions</th>
   </tr>
   <% @editions.each do |edition| %>
     <tr>
@@ -14,7 +14,10 @@
       <td><%= edition.topic %></td>
       <td><%= romanian_format(edition.date) %></td>
       <td><%= edition.participants.size %></td>
-      <td><%= link_to "Show", edition_path(edition.id) %></td>
+      <td>
+        <%= link_to "Show", edition_path(edition) %>
+        <%= link_to "Edit", edit_edition_path(edition) %>
+      </td>
     </tr>
   <% end %>
 </table>
