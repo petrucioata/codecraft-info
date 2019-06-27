@@ -2,7 +2,9 @@
 
 <hr>
 Topic: <%= @edition.topic %> <br>
-Date: <%= romanian_format(@edition.date) %>
+Date: <%= romanian_format(@edition.date) %><br>
+Description: <%= @edition.description %><br>
+<%= link_to "Edition link", @edition.link %>
 <hr>
 <p><%= @edition.description %></p>
 
