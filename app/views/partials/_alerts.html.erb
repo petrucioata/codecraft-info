@@ -1,0 +1,5 @@
+<% if flash.any? %>
+  <% flash.each do |flash_type, message| %>
+      <%= message %>
+  <% end %>
+<% end %>

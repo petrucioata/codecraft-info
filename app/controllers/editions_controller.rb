@@ -1,5 +1,5 @@
 class EditionsController < ApplicationController
-  before_action :set_edition, only: [:show, :edit, :update, :delete]
+  before_action :set_edition, only: [:show, :edit, :update, :destroy]
 
   # GET /editions
   def index
@@ -30,7 +30,7 @@ class EditionsController < ApplicationController
     end
   end
 
-  # PUT /editions/:id
+  # PUT|PATCH /editions/:id
   def update
     if @edition.update_attributes(edition_params)
       redirect_to @edition, notice: 'Edition was succesfully updated.'
@@ -39,8 +39,9 @@ class EditionsController < ApplicationController
     end
   end
 
-  def delete
-    @edition.destroy
+  # DELETE /editions/:id
+  def destroy
+    @edition.destroy if @edition
     redirect_to editions_path
   end
 
