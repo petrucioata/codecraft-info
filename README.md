@@ -14,18 +14,18 @@ Things you may want to cover:
   `MySQL`
 
 * Configuration
-    ```
-    cp config/samples/local_env.yml config
-    ```
-    Update `config/local_env.yml` using your corresponding values
+  ```
+  cp config/samples/local_env.yml config
+  ```
+  Update `config/local_env.yml` with your corresponding values
 
-* Database creation
-    `rails db:setup`
-
-* Database initialization
-    `rails db:migrate`
+* Database creation & initialization
+  `rails db:setup`
 
 * How to run the test suite
+  `rspec --format=doc`
+
+  Open coverage/index.html in a browser to see a detailed report for app's coverage
 
 * Services (job queues, cache servers, search engines, etc.)
 
