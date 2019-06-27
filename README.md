@@ -25,7 +25,7 @@ Things you may want to cover:
 * How to run the test suite
   `rspec --format=doc`
 
-  Open coverage/index.html in a browser to see a detailed report for app's coverage
+  Open `coverage/index.html` in a browser to see a detailed report of app's coverage
 
 * Services (job queues, cache servers, search engines, etc.)
 

@@ -23,14 +23,14 @@ RSpec.describe 'Editions', type: :request do
     subject(:create_edition) { post editions_path, params: { edition: params } }
 
     context 'when the required params are provided' do
-      let(:params) do
+      let(:params) {
         {
           "name": Faker::App.name,
           "link": Faker::Internet.url("codefights.com"),
           "date": Date.today,
           "description": Faker::Lorem.sentence
         }
-      end
+      }
 
       it "creates an Edition and redirects to the Edition's page" do
         new_edition
