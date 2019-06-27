@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :edition do
-    name { "Edition name" }
-    topic { "Edition topic" }
-    link { "https://codecraft.com" }
-    description { "Editions description" }
-    date { Time.parse("2019-06-25T12:00") }
+    name { Faker::Name.first_name }
+    topic { Faker::Lorem.sentence }
+    link { "https://#{Faker::Company.name}.com" }
+    description { Faker::Lorem.sentence }
+    date { Faker::Time.between(DateTime.now - 1, DateTime.now) }
   end
 end
