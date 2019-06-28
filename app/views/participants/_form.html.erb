@@ -1,0 +1,31 @@
+<%= form_with(model: participant, multipart: true, local: true) do |f| %>
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :link %><br />
+    <%= f.text_field :link %>
+  </div>
+
+  <div class="field">
+    <%= f.label :position %><br />
+    <%= f.select "position_id", options_for_select(Position.all.map{ |p| [p.short_name, p.id]}) %>
+  </div>
+
+  <br />
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
