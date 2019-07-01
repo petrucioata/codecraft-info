@@ -1,0 +1,10 @@
+<h1>Participant <%= @participant.username %></h1>
+
+Username: <%= @participant.username %> <br />
+First Name: <%= @participant.first_name %> <br />
+Last Name: <%= @participant.last_name %> <br />
+Position: <%= @participant.position.short_name %> <br />
+<%= link_to 'Code Signal link', @participant.link %>
+<hr>
+<%= link_to 'Edit', edit_participant_path(@participant) %>
+<%= link_to 'Participants', participants_path %>
