@@ -19,18 +19,18 @@ RSpec.describe 'Participant', type: :request do
 
   describe 'creates a new Participant' do
     let(:new_participant) { get new_participant_path }
+    let(:params) {
+      {
+        "username": Faker::App.name,
+        "first_name": Faker::Name.first_name,
+        "last_name": Faker::Name.last_name,
+        "link": Faker::Internet.url("codefights.com"),
+        "position_id": participant.position_id
+      }
+    }
     subject(:create_participant) { post participants_path, params: { participant: params } }
 
     context 'when the required params are provided' do
-      let(:params) {
-        {
-          "username": Faker::App.name,
-          "first_name": Faker::Name.first_name,
-          "last_name": Faker::Name.last_name,
-          "link": Faker::Internet.url("codefights.com")
-        }
-      }
-
       it "creates a Participant and redirects to the Participant's page" do
         new_participant
         expect(response).to render_template(:new)
@@ -40,21 +40,72 @@ RSpec.describe 'Participant', type: :request do
         follow_redirect!
 
         expect(response).to render_template(:show)
-        expect(response.body).to include('Participant was succesfully created.')
+        expect(response.body).to include('Participant was successfully created.')
       end
     end
 
-    xcontext 'when the required params are missing' do
-      let(:params) {
-        {
-          "name": Faker::App.name,
-          "date": Date.today
-        }
-      }
+    context 'when the username is not unique' do
+      before { params[:username] = participant.username }
+
       it 'renders new Edition view and returns the corresponding error' do
         create_participant
         expect(response).to render_template(:new)
-        expect(response.body).to include("Link can&#39;t be blank")
+        expect(response.body).to include('Username has already been taken')
+      end
+    end
+  end
+
+  describe 'updates a Participant' do
+    subject(:update_participant) {
+      patch participant_path(participant), params: { participant: params }
+    }
+
+    context 'when the params are correct' do
+      let(:params) {
+        {
+          "username": Faker::Lorem.unique.word,
+          "link": Faker::Internet.url
+        }
+      }
+
+      it "updates the Participant proporties and redirects to Participant's page" do
+        update_participant
+
+        expect(response).to redirect_to(participant_path(participant))
+        follow_redirect!
+
+        expect(response.body).to include 'Participant was successfully updated'
+        expect { participant.reload }
+          .to change { participant.username }.to(params[:username])
+          .and change { participant.link}.to(params[:link])
+      end
+    end
+
+    context 'when the username already exists' do
+      let(:second_participant) { create(:participant) }
+      let(:params) {
+        { "username": second_participant.username }
+      }
+
+      it 'renders edit participant view and returns the corresponding error' do
+        update_participant
+
+        expect(response).to render_template(:edit)
+        expect(response.body).to include('Username has already been taken')
+      end
+    end
+  end
+
+  describe 'deletes a Participant' do
+    subject(:delete_participant) { delete participant_path(participant) }
+
+    context 'when the participant is find' do
+      it { expect { delete_participant }.to change{ Participant.count }.by -1 }
+
+      it 'redirects to participants list' do
+        delete_participant
+
+        expect(response).to redirect_to(participants_path)
       end
     end
   end
