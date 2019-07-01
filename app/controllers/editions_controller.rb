@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class EditionsController < ApplicationController
-  before_action :set_edition, only: [:show, :edit, :update, :destroy]
+  before_action :set_edition, only: %i[show edit update destroy]
 
   # GET /editions
   def index
@@ -24,24 +26,24 @@ class EditionsController < ApplicationController
     @edition = Edition.new(edition_params)
 
     if @edition.save
-      redirect_to @edition, notice: 'Edition was succesfully created.'
+      redirect_to @edition, notice: 'Edition was successfully created.'
     else
-      render action: "new"
+      render action: :new
     end
   end
 
   # PUT|PATCH /editions/:id
   def update
     if @edition.update_attributes(edition_params)
-      redirect_to @edition, notice: 'Edition was succesfully updated.'
+      redirect_to @edition, notice: 'Edition was successfully updated.'
     else
-      render action: "new"
+      render action: :edit
     end
   end
 
   # DELETE /editions/:id
   def destroy
-    @edition.destroy if @edition
+    @edition&.destroy
     redirect_to editions_path
   end
 

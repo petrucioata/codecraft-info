@@ -4,9 +4,9 @@
 Topic: <%= @edition.topic %> <br>
 Date: <%= romanian_format(@edition.date) %><br>
 Description: <%= @edition.description %><br>
-<%= link_to "Edition link", @edition.link %>
+<%= link_to 'Edition link', @edition.link %>
 <hr>
 <p><%= @edition.description %></p>
 
-<%= link_to "Edit", edit_edition_path(@edition) %>
-<%= link_to "Editions", editions_path %>
+<%= link_to 'Edit', edit_edition_path(@edition) %>
+<%= link_to 'Editions', editions_path %>
