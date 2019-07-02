@@ -13,7 +13,7 @@
       <td><%= link_to participant.username, participant.link, target: '_blank' %></td>
       <td><%= participant.first_name %></td>
       <td><%= participant.last_name %></td>
-      <td><%= participant.position.short_name %></td>
+      <td><%= participant.position_name %></td>
       <td>
         <%= link_to 'Show', participant_path(participant) %>
         <%= link_to 'Edit', edit_participant_path(participant) %>
