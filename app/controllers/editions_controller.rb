@@ -34,7 +34,7 @@ class EditionsController < ApplicationController
 
   # PUT|PATCH /editions/:id
   def update
-    if @edition.update_attributes(edition_params)
+    if @edition.update(edition_params)
       redirect_to @edition, notice: 'Edition was successfully updated.'
     else
       render action: :edit

@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def romanian_format(date)
-    begin
-      date.strftime("%d %B %Y")
-    rescue
-      ""
-    end
+    date.strftime('%d %B %Y')
+  rescue StandardError
+    ''
   end
 end

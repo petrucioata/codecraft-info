@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ParticipantsController < ApplicationController
-  before_action :set_participant, only: [:show, :edit, :update, :destroy]
+  before_action :set_participant, only: %i[show edit update destroy]
 
   # GET /participants
   def index
@@ -32,7 +34,7 @@ class ParticipantsController < ApplicationController
 
   # PUT|PATCH /participants/:id
   def update
-    if @participant.update_attributes(participant_params)
+    if @participant.update(participant_params)
       redirect_to @participant, notice: 'Participant was successfully updated.'
     else
       render action: :edit
@@ -41,7 +43,7 @@ class ParticipantsController < ApplicationController
 
   # DELETE /participants/:id
   def destroy
-    @participant.destroy if @participant
+    @participant&.destroy
     redirect_to participants_path
   end
 

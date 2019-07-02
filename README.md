@@ -22,6 +22,9 @@ Things you may want to cover:
 * Database creation & initialization
   `rails db:setup`
 
+* Handle events on file system modifications
+  `bundle exec guard`
+
 * How to run the test suite
   `rspec --format=doc`
 
