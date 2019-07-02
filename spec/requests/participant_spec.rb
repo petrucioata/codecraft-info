@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Participant', type: :request do
@@ -18,17 +20,20 @@ RSpec.describe 'Participant', type: :request do
   end
 
   describe 'creates a new Participant' do
+    subject(:create_participant) do
+      post participants_path, params: { participant: params }
+    end
+
     let(:new_participant) { get new_participant_path }
-    let(:params) {
+    let(:params) do
       {
         "username": Faker::App.name,
         "first_name": Faker::Name.first_name,
         "last_name": Faker::Name.last_name,
-        "link": Faker::Internet.url("codefights.com"),
+        "link": Faker::Internet.url('codefights.com'),
         "position_id": participant.position_id
       }
-    }
-    subject(:create_participant) { post participants_path, params: { participant: params } }
+    end
 
     context 'when the required params are provided' do
       it "creates a Participant and redirects to the Participant's page" do
@@ -56,17 +61,17 @@ RSpec.describe 'Participant', type: :request do
   end
 
   describe 'updates a Participant' do
-    subject(:update_participant) {
+    subject(:update_participant) do
       patch participant_path(participant), params: { participant: params }
-    }
+    end
 
     context 'when the params are correct' do
-      let(:params) {
+      let(:params) do
         {
           "username": Faker::Lorem.unique.word,
           "link": Faker::Internet.url
         }
-      }
+      end
 
       it "updates the Participant proporties and redirects to Participant's page" do
         update_participant
@@ -76,16 +81,18 @@ RSpec.describe 'Participant', type: :request do
 
         expect(response.body).to include 'Participant was successfully updated'
         expect { participant.reload }
-          .to change { participant.username }.to(params[:username])
-          .and change { participant.link}.to(params[:link])
+          .to change(participant, :username)
+          .to(params[:username])
+          .and change(participant, :link)
+          .to(params[:link])
       end
     end
 
     context 'when the username already exists' do
       let(:second_participant) { create(:participant) }
-      let(:params) {
+      let(:params) do
         { "username": second_participant.username }
-      }
+      end
 
       it 'renders edit participant view and returns the corresponding error' do
         update_participant
@@ -100,7 +107,7 @@ RSpec.describe 'Participant', type: :request do
     subject(:delete_participant) { delete participant_path(participant) }
 
     context 'when the participant is find' do
-      it { expect { delete_participant }.to change{ Participant.count }.by -1 }
+      it { expect { delete_participant }.to change(Participant, :count).by(-1) }
 
       it 'redirects to participants list' do
         delete_participant
