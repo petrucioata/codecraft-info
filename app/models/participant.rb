@@ -1,8 +1,14 @@
-class Participant < ApplicationRecord
-  belongs_to :position
+# frozen_string_literal: true
 
-  has_many :participations
+class Participant < ApplicationRecord
+  belongs_to :position, optional: true
+
+  has_many :participations, dependent: :destroy
   has_many :editions, through: :participations
 
-  validates_uniqueness_of :username
+  validates :username, uniqueness: true
+
+  def position_name
+    position&.short_name || 'None'
+  end
 end

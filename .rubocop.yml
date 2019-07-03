@@ -1,0 +1,29 @@
+require: [rubocop-performance, rubocop-rails, rubocop-rspec]
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/requests/*'
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - 'spec/requests/*'
+
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/requests/*'
+
+Metrics/LineLength:
+  Max: 120
+Style/Documentation:
+  Enabled: false
+Style/EmptyMethod:
+  Enabled: false
+Style/BlockComments:
+  Enabled: false

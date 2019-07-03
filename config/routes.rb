@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   resources :editions
   resources :tasks
+  resources :participants
 end

@@ -1,6 +1,8 @@
-class Task < ApplicationRecord
-  belongs_to :edition
-  has_many :solutions
+# frozen_string_literal: true
 
-  validates_uniqueness_of :name
+class Task < ApplicationRecord
+  belongs_to :edition, optional: true
+  has_many :solutions, dependent: :destroy
+
+  validates :name, uniqueness: true
 end

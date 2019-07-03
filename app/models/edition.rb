@@ -1,9 +1,15 @@
+# frozen_string_literal: true
+
 class Edition < ApplicationRecord
-  has_many :participations
+  has_many :participations, dependent: :destroy
   has_many :participants, through: :participations
 
-  has_many :tasks
+  has_many :tasks, dependent: :nullify
 
-  validates_uniqueness_of :name, :link
-  validates_presence_of :name, :link, :date
+  validates :name, uniqueness: true
+  validates :link, uniqueness: true
+
+  validates :name, presence: true
+  validates :link, presence: true
+  validates :date, presence: true
 end
