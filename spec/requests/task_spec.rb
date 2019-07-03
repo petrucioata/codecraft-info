@@ -76,4 +76,40 @@ RSpec.describe 'Task', type: :request do
       end
     end
   end
+
+  describe 'updates a Task' do
+    subject(:update_task) { patch task_path(task), params: { task: params } }
+
+    context 'when the params are correct' do
+      let(:params) { { "name": Faker::Lorem.sentence } }
+
+      it 'updates the task' do
+        update_task
+        expect(task.reload.name).to eq params[:name]
+      end
+
+      it "redirects to Task's page" do
+        update_task
+        expect(response).to redirect_to(task_path(task))
+        follow_redirect!
+
+        expect(response.body).to include('Task was successfully updated')
+      end
+    end
+
+    context 'when some parameters are wrong' do
+      let(:other_task) { create(:task) }
+      let(:params) { { "name": other_task.name } }
+
+      it 'renders edit Task view' do
+        update_task
+        expect(response).to render_template(:edit)
+      end
+
+      it 'returns the corresponding error message' do
+        update_task
+        expect(response.body).to include('Name has already been taken')
+      end
+    end
+  end
 end

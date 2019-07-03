@@ -32,7 +32,13 @@ class TasksController < ApplicationController
     end
   end
 
+  # GET /tasks/:id
   def update
+    if @task.update(task_params)
+      redirect_to @task, notice: 'Task was successfully updated.'
+    else
+      render action: :edit
+    end
   end
 
   def destory
