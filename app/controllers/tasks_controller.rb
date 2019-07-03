@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[show edit update destory]
+  before_action :set_task, only: %i[show edit update destroy]
 
   # GET /tasks
   def index
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
     end
   end
 
-  # GET /tasks/:id
+  # PUT|PATCH /tasks/:id
   def update
     if @task.update(task_params)
       redirect_to @task, notice: 'Task was successfully updated.'
@@ -41,7 +41,10 @@ class TasksController < ApplicationController
     end
   end
 
-  def destory
+  # DELETE /editions/:id
+  def destroy
+    @task&.destroy
+    redirect_to tasks_path
   end
 
   private

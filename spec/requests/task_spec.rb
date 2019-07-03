@@ -112,4 +112,18 @@ RSpec.describe 'Task', type: :request do
       end
     end
   end
+
+  describe 'deletes a Task' do
+    subject(:delete_task) { delete task_path(task) }
+
+    context 'when the task is find' do
+      it { expect { delete_task }.to change(Task, :count).by(-1) }
+
+      it 'redirects to tasks list' do
+        delete_task
+
+        expect(response).to redirect_to(tasks_path)
+      end
+    end
+  end
 end
