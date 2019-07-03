@@ -32,7 +32,7 @@
 
   <div class="field">
     <%= f.label :position %><br />
-    <%= f.select "position_id", options_for_select(Position.all.map{ |p| [p.short_name, p.id]}) %>
+    <%= f.select :position_id, Position.all.map{ |p| [p.short_name, p.id]} %>
   </div>
 
   <br />
