@@ -8,6 +8,7 @@ class TasksController < ApplicationController
     @tasks = Task.all
   end
 
+  # GET task/:id
   def show
   end
 
@@ -16,6 +17,7 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
+  # GET tasks/:id/edit
   def edit
   end
 

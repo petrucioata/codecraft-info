@@ -6,6 +6,8 @@ class Task < ApplicationRecord
 
   validates :name, uniqueness: true
 
+  validates :name, presence: true
+
   def edition_name
     edition&.name || 'None'
   end
