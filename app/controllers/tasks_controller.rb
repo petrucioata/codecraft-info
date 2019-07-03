@@ -11,13 +11,23 @@ class TasksController < ApplicationController
   def show
   end
 
+  # GET tasks/new
   def new
+    @task = Task.new
   end
 
   def edit
   end
 
+  # POST /tasks
   def create
+    @task = Task.new(task_params)
+
+    if @task.save
+      redirect_to @task, notice: 'Task was successfully created.'
+    else
+      render action: :new
+    end
   end
 
   def update
@@ -29,7 +39,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.required(:task).permit(name, author, description, edition_id)
+    params.required(:task).permit(:name, :author, :description, :edition_id)
   end
 
   def set_task

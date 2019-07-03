@@ -8,8 +8,6 @@ RSpec.describe 'Task', type: :request do
   describe 'lists all tasks' do
     subject(:list_tasks) { get tasks_path }
 
-    # before { create(:task) }
-
     it 'returns a successful response' do
       list_tasks
       expect(response).to be_successful
@@ -42,7 +40,9 @@ RSpec.describe 'Task', type: :request do
         expect(response).to render_template(:new)
       end
 
-      it { expect { create_task }.to change(Task, :count).by(1) }
+      it do
+        expect { create_task }.to change(Task, :count).by(1) 
+      end
 
       it "redirect to the Task's page" do
         create_task

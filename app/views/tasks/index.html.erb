@@ -1,2 +1,27 @@
-<h1>Tasks#index</h1>
-<p>Find me in app/views/tasks/index.html.erb</p>
+<h1>CodeCraft tasks</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Author</th>
+    <th>Description</th>
+    <th>Edition</th>
+    <th>Actions</th>
+  </tr>
+  <% @tasks.each do |task| %>
+    <tr>
+      <td><%= task.name %></td>
+      <td><%= task.author %></td>
+      <td><%= task.description %></td>
+      <td><%= task.edition_name %></td>
+      <td>
+        <%= link_to 'Show', task_path(task) %>
+        <%= link_to 'Edit', edit_task_path(task) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
+
+<%= link_to 'New task', new_task_path %>
