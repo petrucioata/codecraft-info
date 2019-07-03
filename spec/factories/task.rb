@@ -2,9 +2,12 @@
 
 FactoryBot.define do
   factory :task do
-    name { Faker::Lorem.sentence }
+    name { Faker::Lorem.words(2).join('_') }
     author { Faker::FunnyName.name }
     description { Faker::Quote.yoda }
-    edition { create(:edition) }
+
+    trait :with_edition do
+      edition
+    end
   end
 end

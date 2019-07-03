@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Task', type: :request do
+RSpec.describe 'Tasks', type: :request do
   let!(:task) { create(:task) }
 
   describe 'lists all tasks' do
