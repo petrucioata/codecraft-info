@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :request do
-  let!(:task) { create(:task) }
+  let!(:task) { create(:task, :with_edition) }
 
   describe 'lists all tasks' do
     subject(:list_tasks) { get tasks_path }
@@ -81,7 +81,9 @@ RSpec.describe 'Tasks', type: :request do
     subject(:update_task) { patch task_path(task), params: { task: params } }
 
     context 'when the params are correct' do
-      let(:params) { { "name": Faker::Lorem.sentence } }
+      let(:params) do
+        { "name": Faker::Lorem.sentence }
+      end
 
       it 'updates the task' do
         update_task
@@ -99,7 +101,9 @@ RSpec.describe 'Tasks', type: :request do
 
     context 'when some parameters are wrong' do
       let(:other_task) { create(:task) }
-      let(:params) { { "name": other_task.name } }
+      let(:params) do
+        { "name": other_task.name }
+      end
 
       it 'renders edit Task view' do
         update_task
