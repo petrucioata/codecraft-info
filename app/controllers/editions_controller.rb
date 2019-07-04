@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EditionsController < ApplicationController
-  before_action :set_edition, only: %i[show edit update destroy]
+  before_action :set_edition, only: %i[show edit update destroy new_import import]
 
   # GET /editions
   def index
@@ -45,6 +45,19 @@ class EditionsController < ApplicationController
   def destroy
     @edition&.destroy
     redirect_to editions_path
+  end
+
+  # GET/editions/:id/import
+  def new_import
+  end
+
+  # POST /editions/:id/import
+  def import
+    if @edition&.import_csv(params[:file])
+      redirect_to edition_path(@edition), notice: 'Edition details were imported!'
+    else
+      render action: :new_import
+    end
   end
 
   private
