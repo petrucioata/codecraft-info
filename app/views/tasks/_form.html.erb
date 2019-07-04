@@ -27,7 +27,7 @@
 
   <div class="field">
     <%= f.label :edition %><br />
-    <%= f.select :edition_id, Edition.all.map{ |p| [p.name, p.id]} %>
+    <%= f.select :edition_id, Edition.all.map{ |p| [p.name, p.id]}, include_blank: true %>
   </div>
 
   <br />
