@@ -9,8 +9,28 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= render partial: 'partials/alerts' %>
-    <%= yield %>
-  </body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class='container'>
+      <a class="navbar-brand" href="/">CodeCraft</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+
+          <%= link_to "Editions", editions_path,class: "nav-item nav-link active" %>
+          <%= link_to "Participants", participants_path, class: "nav-item nav-link"%>
+          <%= link_to "Tasks", tasks_path, class: "nav-item nav-link"%>
+          
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class='container'>
+    <body>
+      <%= render partial: 'partials/alerts' %>
+      <%= yield %>
+    </body>
+  </div>
 </html>
