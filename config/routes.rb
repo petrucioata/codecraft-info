@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   post 'editions/:id', to: 'editions#import', as: 'import_edition'
 
   resources :editions
+  resources :tasks
   resources :participants
 end

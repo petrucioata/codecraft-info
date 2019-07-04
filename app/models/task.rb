@@ -5,4 +5,10 @@ class Task < ApplicationRecord
   has_many :solutions, dependent: :destroy
 
   validates :name, uniqueness: true
+
+  validates :name, presence: true
+
+  def edition_name
+    edition&.name || 'None'
+  end
 end
