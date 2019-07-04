@@ -1,0 +1,9 @@
+<div>
+  <h1>Import <%= @edition.name %> results!</h1>
+
+  <%= form_tag import_edition_path(@edition), multipart: true do %>
+    <%= file_field_tag :file, accept: 'text/csv' %>
+    <br/><br/>
+    <%= submit_tag 'Import' %>
+  <% end %>
+</div>

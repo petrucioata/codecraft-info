@@ -3,8 +3,34 @@
 Username: <%= @participant.username %> <br />
 First Name: <%= @participant.first_name %> <br />
 Last Name: <%= @participant.last_name %> <br />
-Position: <%= @participant.position.short_name %> <br />
-<%= link_to 'Code Signal link', @participant.link %>
+Position: <%= @participant.position_name %> <br />
+<%= link_to 'Code Signal link', @participant.link, target: '_blank' %>
 <hr>
+
+<% if @participant.participations.size > 0 %>
+  <h2>Editions results</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Edition name</th>
+        <th>Date</th>
+        <th>Total Points</th>
+        <th>Total Time</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @participant.participations.each do |participation| %>
+        <tr>
+          <td><%= participation.edition.name %></td>
+          <td><%= participation.edition.date %></td>
+          <td><%= participation.total_points %></td>
+          <td><%= participation.total_time %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
 <%= link_to 'Edit', edit_participant_path(@participant) %>
 <%= link_to 'Participants', participants_path %>
