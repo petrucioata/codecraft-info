@@ -1,7 +1,7 @@
 <h1>CodeCraft editions</h1>
 
-<table class="table">
-  <thead class="thead-dark">
+<table class='table'>
+  <thead class='thead-dark'>
     <tr>
       <th>Name</th>
       <th>Topic</th>
@@ -17,9 +17,9 @@
       <td><%= romanian_format(edition.date) %></td>
       <td><%= edition.participants.size %></td>
       <td>
-        <%= link_to 'Show', edition_path(edition), class: "btn btn-primary" %>
-        <%= link_to 'Edit', edit_edition_path(edition), class: "btn btn-primary" %>
-        <%= link_to 'Destroy', edition_path(edition), class: "btn btn-primary",
+        <%= link_to 'Show', edition_path(edition), class: 'btn btn-primary' %>
+        <%= link_to 'Edit', edit_edition_path(edition), class: 'btn btn-primary' %>
+        <%= link_to 'Destroy', edition_path(edition), class: 'btn btn-primary',
           data: {:confirm => 'Are you sure?'}, :method => :delete %>
       </td>
     </tr>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Edition', new_edition_path, class: "btn btn-primary"%>
+<%= link_to 'New Edition', new_edition_path, class: 'btn btn-primary'%>

@@ -1,7 +1,7 @@
 <h1>CodeCraft participants</h1>
 
-<table class="table">
-  <thead class="thead-dark">
+<table class='table'>
+  <thead class='thead-dark'>
     <tr>
       <th>Username</th>
       <th>First Name</th>
@@ -17,9 +17,9 @@
       <td><%= participant.last_name %></td>
       <td><%= participant.position_name %></td>
       <td>
-        <%= link_to 'Show', participant_path(participant), class: "btn btn-primary" %>
-        <%= link_to 'Edit', edit_participant_path(participant), class: "btn btn-primary" %>
-        <%= link_to 'Destroy', participant_path(participant), class: "btn btn-primary", 
+        <%= link_to 'Show', participant_path(participant), class: 'btn btn-primary' %>
+        <%= link_to 'Edit', edit_participant_path(participant), class: 'btn btn-primary' %>
+        <%= link_to 'Destroy', participant_path(participant), class: 'btn btn-primary', 
           data: {:confirm => 'Are you sure?'}, :method => :delete %>
       </td>
     </tr>
@@ -28,4 +28,4 @@
 
 <br />
 
-<%= link_to 'New Participant', new_participant_path, class: "btn btn-primary" %>
+<%= link_to 'New Participant', new_participant_path, class: 'btn btn-primary' %>
