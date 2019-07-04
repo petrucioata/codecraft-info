@@ -1,13 +1,15 @@
 <h1>CodeCraft editions</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Topic</th>
-    <th>Date</th>
-    <th>No.participants</th>
-    <th>Actions</th>
-  </tr>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Topic</th>
+      <th>Date</th>
+      <th>No.participants</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
   <% @editions.each do |edition| %>
     <tr>
       <td><%= link_to edition.name, edition.link, target: '_blank' %></td>
@@ -15,13 +17,15 @@
       <td><%= romanian_format(edition.date) %></td>
       <td><%= edition.participants.size %></td>
       <td>
-        <%= link_to 'Show', edition_path(edition) %>
-        <%= link_to 'Edit', edit_edition_path(edition) %>
+        <%= link_to 'Show', edition_path(edition), class: "btn btn-primary" %>
+        <%= link_to 'Edit', edit_edition_path(edition), class: "btn btn-primary" %>
+        <%= link_to 'Destroy', edition_path(edition), class: "btn btn-primary",
+          data: {:confirm => 'Are you sure?'}, :method => :delete %>
       </td>
     </tr>
   <% end %>
 </table>
 
-<br />
+<br>
 
-<%= link_to 'New Edition', new_edition_path%>
+<%= link_to 'New Edition', new_edition_path, class: "btn btn-primary"%>
