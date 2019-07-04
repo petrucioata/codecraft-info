@@ -6,7 +6,7 @@ FactoryBot.define do
     author { Faker::FunnyName.name }
     description { Faker::Quote.yoda }
 
-    trait :with_edition do
+    trait :for_edition do
       edition
     end
   end

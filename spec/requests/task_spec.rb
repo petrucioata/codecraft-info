@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :request do
-  let!(:task) { create(:task, :with_edition) }
+  let!(:task) { create(:task, :for_edition) }
 
   describe 'lists all tasks' do
     subject(:list_tasks) { get tasks_path }
