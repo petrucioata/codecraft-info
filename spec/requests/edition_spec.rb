@@ -138,7 +138,6 @@ RSpec.describe 'Editions', type: :request do
       end
 
       it "redirect to the Edition's page" do
-        byebug
         import_edition
         redirect_to(assigns(:edition))
         follow_redirect!
