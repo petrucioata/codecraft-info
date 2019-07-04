@@ -5,7 +5,7 @@ class EditionsController < ApplicationController
 
   # GET /editions
   def index
-    @editions = Edition.all
+    @editions = Edition.paginate(page: params[:page])
   end
 
   # GET /editions/:id
