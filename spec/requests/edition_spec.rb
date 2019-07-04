@@ -121,4 +121,39 @@ RSpec.describe 'Editions', type: :request do
       end
     end
   end
+
+  xdescribe 'imports an Edition' do
+    subject(:import_edition) do
+      post import_edition_path(edition), params: { file: file }
+    end
+
+    let(:new_import_edition) { get new_import_edition_path(edition) }
+
+    let(:file) { file_fixture('well_formatted.csv') }
+
+    context 'when the import is successfully made' do
+      it 'renders new import Edition view' do
+        new_import_edition
+        expect(response).to render_template(:new_import)
+      end
+
+      it "redirect to the Edition's page" do
+        byebug
+        import_edition
+        redirect_to(assigns(:edition))
+        follow_redirect!
+
+        expect(response).to render_template(:show)
+        expect(response.body).to include('Edition details were imported!')
+      end
+    end
+
+    context 'when the edition is not defined' do
+      it 'renders new Import Edition view' do
+        post import_edition_path(edition), params: {}
+
+        expect(response).to render_template(:new_import)
+      end
+    end
+  end
 end
