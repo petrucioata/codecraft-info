@@ -1,7 +1,7 @@
 <%= form_with(model: task, multipart: true, local: true) do |f| %>
   <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+    <div id='error_explanation'>
+      <h2><%= pluralize(task.errors.count, 'error') %> prohibited this task from being saved:</h2>
 
       <ul>
       <% task.errors.full_messages.each do |message| %>
@@ -10,28 +10,28 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
+  <div class='field form-group'>
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class='field form-group'>
     <%= f.label :author %><br />
-    <%= f.text_field :author %>
+    <%= f.text_field :author, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class='field form-group'>
     <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <%= f.text_area :description, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class='field form-group'>
     <%= f.label :edition %><br />
-    <%= f.select :edition_id, Edition.all.map{ |p| [p.name, p.id]}, include_blank: true %>
+    <%= f.select :edition_id, Edition.all.map{ |p| [p.name, p.id]}, { include_blank: true }, { class: 'form-control' } %>
   </div>
 
   <br />
-  <div class="actions">
-    <%= f.submit %>
+  <div class='actions'>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
