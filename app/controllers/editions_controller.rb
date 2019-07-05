@@ -10,9 +10,7 @@ class EditionsController < ApplicationController
 
   # GET /editions/:id
   def show
-    @edition = Edition.find(params[:id])
-    @participations = @edition.participations
-    @participations = @participations.paginate(page: params[:page])
+    @participations = @edition.participations.paginate(page: params[:page])
   end
 
   # GET /editions/new

@@ -34,4 +34,5 @@ Description: <%= @edition.description %><br>
 <%= link_to 'Edit', edit_edition_path(@edition) %>
 <%= link_to 'Editions', editions_path %>
 
-<%= will_paginate @participations %>
+<%= will_paginate @participations, renderer: BootstrapPagination::Rails, 
+    :previous_label => '<<', :next_label => '>>' %>

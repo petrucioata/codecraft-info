@@ -7,7 +7,7 @@ Position: <%= @participant.position_name %> <br />
 <%= link_to 'Code Signal link', @participant.link, target: '_blank' %>
 <hr>
 
-<% if @participant.participations.size > 0 %>
+<% if @participations.size > 0 %>
   <h2>Editions results</h2>
   <table>
     <thead>
@@ -20,7 +20,7 @@ Position: <%= @participant.position_name %> <br />
     </thead>
 
     <tbody>
-      <% @participant.participations.each do |participation| %>
+      <% @participations.each do |participation| %>
         <tr>
           <td><%= participation.edition.name %></td>
           <td><%= participation.edition.date %></td>
@@ -31,6 +31,9 @@ Position: <%= @participant.position_name %> <br />
     </tbody>
   </table>
 <% end %>
+
+<%= will_paginate @participations, renderer: BootstrapPagination::Rails, 
+    :previous_label => '<<', :next_label => '>>' %>
 
 <%= link_to 'Edit', edit_participant_path(@participant) %>
 <%= link_to 'Participants', participants_path %>
