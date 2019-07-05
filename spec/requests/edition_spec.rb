@@ -122,16 +122,17 @@ RSpec.describe 'Editions', type: :request do
     end
   end
 
-  xdescribe 'imports an Edition' do
+  describe 'imports an Edition' do
     subject(:import_edition) do
-      post import_edition_path(edition), params: { file: file }
+      post import_edition_path(edition), params: { file: Rack::Test::UploadedFile.new(file) }
     end
 
     let(:new_import_edition) { get new_import_edition_path(edition) }
-
-    let(:file) { file_fixture('well_formatted.csv') }
+    let(:file) { fixture_file_upload(file_name) }
 
     context 'when the import is successfully made' do
+      let(:file_name) { 'well_formatted.csv' }
+
       it 'renders new import Edition view' do
         new_import_edition
         expect(response).to render_template(:new_import)
@@ -148,8 +149,10 @@ RSpec.describe 'Editions', type: :request do
     end
 
     context 'when the edition is not defined' do
+      let(:file_name) { 'malformatted.csv' }
+
       it 'renders new Import Edition view' do
-        post import_edition_path(edition), params: {}
+        import_edition
 
         expect(response).to render_template(:new_import)
       end

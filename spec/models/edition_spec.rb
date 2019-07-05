@@ -6,10 +6,11 @@ RSpec.describe Edition, type: :model do
   let(:edition) { create(:edition) }
 
   describe '.import_csv' do
-    before { edition.import_csv(fixture_file_upload('well_formatted.csv')) }
+    before { edition.import_csv(fixture_file_upload(file_name)) }
 
-    context 'when the provide CSV is well formatted' do
-      let(:rows) { CSV.read(fixture_file_upload('well_formatted.csv'), headers: true) }
+    context 'when the provided CSV is well formatted' do
+      let(:file_name) { 'well_formatted.csv' }
+      let(:rows) { CSV.read(fixture_file_upload(file_name), headers: true) }
       let(:usernames) { rows['username'] }
       let(:headers) { %w[nr_crt username task_a task_b task_c points total_time] }
 
@@ -24,6 +25,12 @@ RSpec.describe Edition, type: :model do
       it { expect(Participation.all.map(&:edition_id)).to all eq edition.id }
 
       it { expect(Solution.count).to eq rows.size * 3 }
+    end
+
+    context 'when the provided CSV is malformatted' do
+      let(:file_name) { 'malformatted.csv' }
+
+      it { expect { edition.import_csv }.to raise_error(StandardError) }
     end
   end
 end
