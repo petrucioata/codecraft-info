@@ -1,36 +1,42 @@
-<h1>Participant <%= @participant.username %></h1>
-
-Username: <%= @participant.username %> <br />
-First Name: <%= @participant.first_name %> <br />
-Last Name: <%= @participant.last_name %> <br />
-Position: <%= @participant.position_name %> <br />
-<%= link_to 'Code Signal link', @participant.link, target: '_blank' %>
-<hr>
+<div class="panel panel-default">
+  <div class="panel-heading"><h1>Participant <%= @participant.username %></h1></div>
+  <dl class="dl-horizontal">
+    <dt>Username:</dt>   <dd><%= @participant.username %></dd>
+    <dt>First Name:</dt> <dd><%= @participant.first_name %></dd>
+    <dt>Last Name:</dt>  <dd><%= @participant.last_name %></dd>
+    <dt>Position:</dt>   <dd><%= @participant.position_name %></dd>
+    <dt>Link:</dt>       <dd><%= link_to 'Code Signal link', @participant.link, target: '_blank' %></dd>
+  </dl>
+</div>
 
 <% if @participant.participations.size > 0 %>
-  <h2>Editions results</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Edition name</th>
-        <th>Date</th>
-        <th>Total Points</th>
-        <th>Total Time</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @participant.participations.each do |participation| %>
+  <div class="panel panel-default">
+    <div class="panel-heading"><h2>Editions results</h2></div>
+    
+    <table class='table'>
+      <thead class='thead-dark'>
         <tr>
-          <td><%= participation.edition.name %></td>
-          <td><%= participation.edition.date %></td>
-          <td><%= participation.total_points %></td>
-          <td><%= participation.total_time %></td>
+          <th>Edition name</th>
+          <th>Date</th>
+          <th>Total Points</th>
+          <th>Total Time</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @participant.participations.each do |participation| %>
+          <tr>
+            <td><%= participation.edition.name %></td>
+            <td><%= participation.edition.date %></td>
+            <td><%= participation.total_points %></td>
+            <td><%= participation.total_time %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>
 
-<%= link_to 'Edit', edit_participant_path(@participant) %>
-<%= link_to 'Participants', participants_path %>
+<hr>
+<%= link_to 'Edit', edit_participant_path(@participant), class: 'btn btn-primary' %>
+<%= link_to 'Participants', participants_path, class: 'btn btn-primary' %>
