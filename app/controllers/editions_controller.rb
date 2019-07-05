@@ -5,11 +5,12 @@ class EditionsController < ApplicationController
 
   # GET /editions
   def index
-    @editions = Edition.all
+    @editions = Edition.paginate(page: params[:page])
   end
 
   # GET /editions/:id
   def show
+    @participations = @edition.participations.paginate(page: params[:page])
   end
 
   # GET /editions/new

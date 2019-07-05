@@ -5,7 +5,7 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all
+    @tasks = Task.paginate(page: params[:page])
   end
 
   # GET task/:id
