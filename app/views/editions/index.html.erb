@@ -21,6 +21,7 @@
       <td>
         <%= link_to 'Show', edition_path(edition), class: 'btn btn-primary' %>
         <%= link_to 'Edit', edit_edition_path(edition), class: 'btn btn-primary' %>
+        <%= link_to 'Import', new_import_edition_path(edition), class: 'btn btn-primary' %>
         <%= link_to 'Destroy', edition_path(edition), class: 'btn btn-primary',
           data: {:confirm => 'Are you sure?'}, :method => :delete %>
       </td>
