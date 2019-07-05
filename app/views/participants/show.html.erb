@@ -32,8 +32,11 @@ Position: <%= @participant.position_name %> <br />
   </table>
 <% end %>
 
-<%= will_paginate @participations, renderer: BootstrapPagination::Rails, 
-    :previous_label => '<<', :next_label => '>>' %>
+<div class="text-center">
+  <%= will_paginate @participations, renderer: BootstrapPagination::Rails,
+      :previous_label => '<<', :next_label => '>>' %>
+</div>
+<br>
 
 <%= link_to 'Edit', edit_participant_path(@participant) %>
 <%= link_to 'Participants', participants_path %>

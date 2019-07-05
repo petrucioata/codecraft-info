@@ -31,8 +31,12 @@ Description: <%= @edition.description %><br>
     </tbody>
   </table>
 <% end %>
+
+<div class="text-center">
+  <%= will_paginate @participations, renderer: BootstrapPagination::Rails,
+      :previous_label => '<<', :next_label => '>>' %>
+</div>
+<br>
+
 <%= link_to 'Edit', edit_edition_path(@edition) %>
 <%= link_to 'Editions', editions_path %>
-
-<%= will_paginate @participations, renderer: BootstrapPagination::Rails, 
-    :previous_label => '<<', :next_label => '>>' %>
