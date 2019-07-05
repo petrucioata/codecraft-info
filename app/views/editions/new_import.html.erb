@@ -1,0 +1,19 @@
+<div>
+  <h1>Import report for <%= @edition&.name %>!</h1>
+
+  <p>
+    <i>
+      *) Is expected that the CSV file has the following format:<br><br>
+      <b>
+        nr_crt,username,task_a,task_b,task_c,points,total_time<br>
+        1,user1,300 00:23:10,-,300 00:59:23,600,00:59:23<br>
+      </b>
+    </i>
+  </p>
+
+  <%= form_tag import_edition_path(@edition), multipart: true do %>
+    <%= file_field_tag :file, accept: 'text/csv' %>
+    <br/><br/>
+    <%= submit_tag 'Import' %>
+  <% end %>
+</div>

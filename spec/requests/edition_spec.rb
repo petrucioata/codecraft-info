@@ -121,4 +121,41 @@ RSpec.describe 'Editions', type: :request do
       end
     end
   end
+
+  describe 'imports an Edition' do
+    subject(:import_edition) do
+      post import_edition_path(edition), params: { file: Rack::Test::UploadedFile.new(file) }
+    end
+
+    let(:new_import_edition) { get new_import_edition_path(edition) }
+    let(:file) { fixture_file_upload(file_name) }
+
+    context 'when the import is successfully made' do
+      let(:file_name) { 'well_formatted.csv' }
+
+      it 'renders new import Edition view' do
+        new_import_edition
+        expect(response).to render_template(:new_import)
+      end
+
+      it "redirect to the Edition's page" do
+        import_edition
+        redirect_to(assigns(:edition))
+        follow_redirect!
+
+        expect(response).to render_template(:show)
+        expect(response.body).to include('Edition details were imported!')
+      end
+    end
+
+    context 'when the edition is not defined' do
+      let(:file_name) { 'malformatted.csv' }
+
+      it 'renders new Import Edition view' do
+        import_edition
+
+        expect(response).to render_template(:new_import)
+      end
+    end
+  end
 end

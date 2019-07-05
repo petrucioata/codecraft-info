@@ -7,6 +7,29 @@ Description: <%= @edition.description %><br>
 <%= link_to 'Edition link', @edition.link %>
 <hr>
 <p><%= @edition.description %></p>
+<hr>
 
+<% if @edition.participations.size > 0 %>
+  <h2>Edition results</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Total Points</th>
+        <th>Total Time</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @edition.participations.each do |participation| %>
+        <tr>
+          <td><%= participation.participant.username %></td>
+          <td><%= participation.total_points %></td>
+          <td><%= participation.total_time %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 <%= link_to 'Edit', edit_edition_path(@edition) %>
 <%= link_to 'Editions', editions_path %>
