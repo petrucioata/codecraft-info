@@ -1,19 +1,26 @@
 <div>
   <h1>Import report for <%= @edition&.name %>!</h1>
-
-  <p>
-    <i>
-      *) Is expected that the CSV file has the following format:<br><br>
-      <b>
-        nr_crt,username,task_a,task_b,task_c,points,total_time<br>
-        1,user1,300 00:23:10,-,300 00:59:23,600,00:59:23<br>
-      </b>
-    </i>
-  </p>
+  <div class="alert alert-info">
+      <span class="glyphicon glyphicon-info-sign"></span> <strong>Info Message</strong>
+      <hr class="message-inner-separator">
+        *) Is expected that the CSV file has the following format:<br><br>
+        <b>
+          nr_crt,username,task_a,task_b,task_c,points,total_time<br>
+          1,user1,300 00:23:10,-,300 00:59:23,600,00:59:23<br>
+        </b>
+  </div>
 
   <%= form_tag import_edition_path(@edition), multipart: true do %>
-    <%= file_field_tag :file, accept: 'text/csv' %>
+    <div class="input-group">
+      <span class="input-group-btn">
+        <span class="btn btn-small btn-primary btn-inverse" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
+        <%= file_field_tag :file, accept: 'text/csv', onchange: "$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\\\|/]/).pop());", style: "display: none;" %>
+      </span>
+      <span class="form-control"></span>
+    </div>
     <br/><br/>
-    <%= submit_tag 'Import' %>
+    <%= submit_tag 'Import', class: 'btn btn-primary' %>
   <% end %>
 </div>
+
+
