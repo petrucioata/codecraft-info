@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :request do
   let!(:task) { create(:task, :for_edition) }
+  let(:file_name) { 'test_case.txt' }
+  let(:file) { fixture_file_upload(file_name, 'text') }
 
   describe 'lists all tasks' do
     subject(:list_tasks) { get tasks_path }
@@ -21,9 +23,6 @@ RSpec.describe 'Tasks', type: :request do
 
   describe 'create a new Task' do
     subject(:create_task) { post tasks_path, params: { task: params } }
-
-    let(:file_name) { 'test_case.txt' }
-    let(:file) { fixture_file_upload(file_name, 'text') }
 
     let(:params) do
       {
@@ -87,13 +86,18 @@ RSpec.describe 'Tasks', type: :request do
 
     context 'when the params are correct' do
       let(:params) do
-        { "name": Faker::Lorem.sentence }
+        {
+          "name": Faker::Lorem.sentence,
+          "test_cases": [Rack::Test::UploadedFile.new(file)]
+        }
       end
 
       it 'updates the task' do
         update_task
         expect(task.reload.name).to eq params[:name]
       end
+
+      it { expect { update_task }.to change(ActiveStorage::Attachment, :count).by(1) }
 
       it "redirects to Task's page" do
         update_task
