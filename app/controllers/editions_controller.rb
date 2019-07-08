@@ -58,8 +58,9 @@ class EditionsController < ApplicationController
   # POST /editions/:id/import
   def import
     if @edition&.import_csv(params[:file])
-      redirect_to edition_path(@edition), success: 'Edition details were imported!'
+      redirect_to edition_path(@edition), success: 'Edition details were imported.'
     else
+      flash[:warning] = 'Data were not imported.'
       render action: :new_import
     end
   end
