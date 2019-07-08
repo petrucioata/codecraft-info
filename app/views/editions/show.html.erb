@@ -1,22 +1,28 @@
-<div class="panel panel-default">
-  <div class="panel-heading"><h1>Edition <%= @edition.name %></h1> </div>
-  <dl class="dl-horizontal">
-    <dt>Topic:</dt>       <dd><%= @edition.topic %> <br></dd>
-    <dt>Date:</dt>        <dd><%= romanian_format(@edition.date) %><br></dd>
-    <dt>Link:</dt>        <dd><%= link_to 'Edition link', @edition.link %></dd>
+<div class='panel panel-default'>
+  <div class='panel-heading'>
+    <h1>Edition <%= @edition.name %></h1>
+  </div>
+  <dl class='dl-horizontal'>
+    <dt>Topic:</dt> <dd><%= @edition.topic %> <br></dd>
+    <dt>Date: </dt> <dd><%= romanian_format(@edition.date) %><br></dd>
+    <dt>Link: </dt> <dd><%= link_to 'Edition link', @edition.link %></dd>
   </dl>
 </div>
 
-<div class="panel panel-default">
-  <div class="panel-heading"><h1>Description</h1> </div>
-  <div class="panel-body">
+<div class='panel panel-default'>
+  <div class='panel-heading'>
+    <h1>Description</h1>
+  </div>
+  <div class='panel-body'>
     <%= @edition.description %>
   </div>
 </div>
 
 <% if @participations.size > 0 %>
-  <div class="panel panel-default">
-    <div class="panel-heading"><h2>Edition results</h2></div>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>
+      <h2>Edition results</h2>
+    </div>
     <table class='table'>
       <thead class='thead-dark'>
       <tr>
@@ -38,7 +44,7 @@
   </div>
 <% end %>
 
-<div class="text-center">
+<div class='text-center'>
   <%= will_paginate @participations, renderer: BootstrapPagination::Rails,
       :previous_label => '<<', :next_label => '>>' %>
 </div>

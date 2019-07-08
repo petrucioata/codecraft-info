@@ -1,7 +1,7 @@
 <%= form_with(model: edition, multipart: true, local: true) do |f| %>
   <% if edition.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(edition.errors.count, "error") %> prohibited this edition from being saved:</h2>
+    <div id='error_explanation'>
+      <h2><%= pluralize(edition.errors.count, 'error') %> prohibited this edition from being saved:</h2>
 
       <ul>
       <% edition.errors.full_messages.each do |message| %>
@@ -37,7 +37,7 @@
   </div>
 
   <br />
-  <div class="actions">
+  <div class='actions'>
     <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
