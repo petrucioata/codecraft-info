@@ -28,4 +28,9 @@
 </table>
 
 <hr>
+<div class="text-center">
+  <%= will_paginate @editions, renderer: BootstrapPagination::Rails,
+    :previous_label => '<<', :next_label => '>>' %>
+</div>
+
 <%= link_to 'New Edition', new_edition_path, class: 'btn btn-primary'%>

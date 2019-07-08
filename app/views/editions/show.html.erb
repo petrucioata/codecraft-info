@@ -14,20 +14,19 @@
   </div>
 </div>
 
-<% if @edition.participations.size > 0 %>
+<% if @participations.size > 0 %>
   <div class="panel panel-default">
     <div class="panel-heading"><h2>Edition results</h2></div>
     <table class='table'>
       <thead class='thead-dark'>
-        <tr>
-          <th>Username</th>
-          <th>Total Points</th>
-          <th>Total Time</th>
-        </tr>
+      <tr>
+        <th>Username</th>
+        <th>Total Points</th>
+        <th>Total Time</th>
+      </tr>
       </thead>
-
       <tbody>
-        <% @edition.participations.each do |participation| %>
+        <% @participations.each do |participation| %>
           <tr>
             <td><%= participation.participant.username %></td>
             <td><%= participation.total_points %></td>
@@ -38,6 +37,11 @@
     </table>
   </div>
 <% end %>
+
+<div class="text-center">
+  <%= will_paginate @participations, renderer: BootstrapPagination::Rails,
+      :previous_label => '<<', :next_label => '>>' %>
+</div>
 
 <hr>
 <%= link_to 'Edit', edit_edition_path(@edition), class: 'btn btn-primary' %>

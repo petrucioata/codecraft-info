@@ -5,11 +5,12 @@ class ParticipantsController < ApplicationController
 
   # GET /participants
   def index
-    @participants = Participant.all
+    @participants = Participant.paginate(page: params[:page])
   end
 
   # GET /participants/:id
   def show
+    @participations = @participant.participations.paginate(page: params[:page])
   end
 
   # GET /participants/new

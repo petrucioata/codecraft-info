@@ -9,7 +9,7 @@
   </dl>
 </div>
 
-<% if @participant.participations.size > 0 %>
+<% if @participations.size > 0 %>
   <div class="panel panel-default">
     <div class="panel-heading"><h2>Editions results</h2></div>
     
@@ -22,9 +22,8 @@
           <th>Total Time</th>
         </tr>
       </thead>
-
       <tbody>
-        <% @participant.participations.each do |participation| %>
+      <% @participations.each do |participation| %>
           <tr>
             <td><%= participation.edition.name %></td>
             <td><%= participation.edition.date %></td>
@@ -36,6 +35,11 @@
     </table>
   </div>
 <% end %>
+
+<div class="text-center">
+  <%= will_paginate @participations, renderer: BootstrapPagination::Rails,
+      :previous_label => '<<', :next_label => '>>' %>
+</div>
 
 <hr>
 <%= link_to 'Edit', edit_participant_path(@participant), class: 'btn btn-primary' %>
