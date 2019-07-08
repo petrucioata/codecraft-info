@@ -6,4 +6,8 @@ module ApplicationHelper
   rescue StandardError
     ''
   end
+
+  def error_messages(error)
+    error&.full_messages&.join("\n")
+  end
 end
