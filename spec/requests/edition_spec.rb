@@ -144,7 +144,7 @@ RSpec.describe 'Editions', type: :request do
         follow_redirect!
 
         expect(response).to render_template(:show)
-        expect(response.body).to include('Edition details were imported!')
+        expect(response.body).to include('Edition details were imported.')
       end
     end
 
