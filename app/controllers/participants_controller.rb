@@ -27,8 +27,9 @@ class ParticipantsController < ApplicationController
     @participant = Participant.new(participant_params)
 
     if @participant.save
-      redirect_to @participant, notice: 'Participant was successfully created.'
+      redirect_to @participant, success: 'Participant was successfully created.'
     else
+      flash[:warning] = helpers.error_messages(@participant.errors)
       render action: :new
     end
   end
@@ -36,8 +37,9 @@ class ParticipantsController < ApplicationController
   # PUT|PATCH /participants/:id
   def update
     if @participant.update(participant_params)
-      redirect_to @participant, notice: 'Participant was successfully updated.'
+      redirect_to @participant, success: 'Participant was successfully updated.'
     else
+      flash[:warning] = helpers.error_messages(@participant.errors)
       render action: :edit
     end
   end
@@ -45,6 +47,7 @@ class ParticipantsController < ApplicationController
   # DELETE /participants/:id
   def destroy
     @participant&.destroy
+    flash[:success] = 'Participant was successfully deleted.'
     redirect_to participants_path
   end
 
