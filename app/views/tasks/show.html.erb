@@ -10,7 +10,7 @@
     <dt>Test cases: </dt>
     <% if @task.test_cases.attached? %>
       <% @task.test_cases.each do |test_case| %>
-        <dd><%= link_to test_case.filename, rails_blob_path(test_case, disposition: "attachment") %></dd>
+        <dd><%= link_to test_case.filename, rails_blob_path(test_case, disposition: 'attachment') %></dd>
       <% end %>
     <% else %>
       <dd>There are no test cases</dd>

@@ -21,13 +21,16 @@ RSpec.describe 'Tasks', type: :request do
 
   describe 'create a new Task' do
     subject(:create_task) { post tasks_path, params: { task: params } }
+    let(:file_name) { 'test_case.txt' }
+    let(:file) { fixture_file_upload(file_name, 'text') }
 
     let(:params) do
       {
         "name": Faker::Lorem.sentence,
         "author": Faker::FunnyName.name,
         "description": Faker::Quote.yoda,
-        "edition": task.edition_id
+        "edition": task.edition_id,
+        "test_cases": [Rack::Test::UploadedFile.new(file)]
       }
     end
 
@@ -40,6 +43,7 @@ RSpec.describe 'Tasks', type: :request do
       end
 
       it { expect { create_task }.to change(Task, :count).by(1) }
+      it { expect { create_task }.to change(ActiveStorage::Attachment, :count).by(1) }
 
       it "redirect to the Task's page" do
         create_task
