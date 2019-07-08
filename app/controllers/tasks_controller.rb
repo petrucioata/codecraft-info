@@ -26,8 +26,9 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
     if @task.save
-      redirect_to @task, notice: 'Task was successfully created.'
+      redirect_to @task, success: 'Task was successfully created.'
     else
+      flash[:warning] = helpers.error_messages(@task.errors)
       render action: :new
     end
   end
@@ -35,8 +36,9 @@ class TasksController < ApplicationController
   # PUT|PATCH /tasks/:id
   def update
     if @task.update(task_params)
-      redirect_to @task, notice: 'Task was successfully updated.'
+      redirect_to @task, success: 'Task was successfully updated.'
     else
+      flash[:warning] = helpers.error_messages(@task.errors)
       render action: :edit
     end
   end
@@ -44,6 +46,7 @@ class TasksController < ApplicationController
   # DELETE /editions/:id
   def destroy
     @task&.destroy
+    flash[:success] = 'Task was successfully deleted.'
     redirect_to tasks_path
   end
 
