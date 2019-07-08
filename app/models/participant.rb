@@ -8,6 +8,8 @@ class Participant < ApplicationRecord
 
   validates :username, uniqueness: true
 
+  validates :username, presence: true
+
   def position_name
     position&.short_name || 'None'
   end

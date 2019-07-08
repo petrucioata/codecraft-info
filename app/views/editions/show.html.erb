@@ -1,42 +1,54 @@
-<h1>Edition <%= @edition.name %></h1>
+<div class='panel panel-default'>
+  <div class='panel-heading'>
+    <h1>Edition <%= @edition.name %></h1>
+  </div>
+  <dl class='dl-horizontal'>
+    <dt>Topic:</dt> <dd><%= @edition.topic %> <br></dd>
+    <dt>Date: </dt> <dd><%= romanian_format(@edition.date) %><br></dd>
+    <dt>Link: </dt> <dd><%= link_to 'Edition link', @edition.link %></dd>
+  </dl>
+</div>
 
-<hr>
-Topic: <%= @edition.topic %> <br>
-Date: <%= romanian_format(@edition.date) %><br>
-Description: <%= @edition.description %><br>
-<%= link_to 'Edition link', @edition.link %>
-<hr>
-<p><%= @edition.description %></p>
-<hr>
+<div class='panel panel-default'>
+  <div class='panel-heading'>
+    <h1>Description</h1>
+  </div>
+  <div class='panel-body'>
+    <%= @edition.description %>
+  </div>
+</div>
 
 <% if @participations.size > 0 %>
-  <h2>Edition results</h2>
-  <table>
-    <thead>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>
+      <h2>Edition results</h2>
+    </div>
+    <table class='table'>
+      <thead class='thead-dark'>
       <tr>
         <th>Username</th>
         <th>Total Points</th>
         <th>Total Time</th>
       </tr>
-    </thead>
-
-    <tbody>
-      <% @participations.each do |participation| %>
-        <tr>
-          <td><%= participation.participant.username %></td>
-          <td><%= participation.total_points %></td>
-          <td><%= participation.total_time %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @participations.each do |participation| %>
+          <tr>
+            <td><%= participation.participant.username %></td>
+            <td><%= participation.total_points %></td>
+            <td><%= participation.total_time %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>
 
-<div class="text-center">
+<div class='text-center'>
   <%= will_paginate @participations, renderer: BootstrapPagination::Rails,
       :previous_label => '<<', :next_label => '>>' %>
 </div>
-<br>
 
-<%= link_to 'Edit', edit_edition_path(@edition) %>
-<%= link_to 'Editions', editions_path %>
+<hr>
+<%= link_to 'Edit', edit_edition_path(@edition), class: 'btn btn-primary' %>
+<%= link_to 'Editions', editions_path, class: 'btn btn-primary' %>

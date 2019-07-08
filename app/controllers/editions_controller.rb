@@ -27,8 +27,9 @@ class EditionsController < ApplicationController
     @edition = Edition.new(edition_params)
 
     if @edition.save
-      redirect_to @edition, notice: 'Edition was successfully created.'
+      redirect_to @edition, success: 'Edition was successfully created.'
     else
+      flash[:warning] = helpers.error_messages(@edition.errors)
       render action: :new
     end
   end
@@ -36,8 +37,9 @@ class EditionsController < ApplicationController
   # PUT|PATCH /editions/:id
   def update
     if @edition.update(edition_params)
-      redirect_to @edition, notice: 'Edition was successfully updated.'
+      redirect_to @edition, success: 'Edition was successfully updated.'
     else
+      flash[:warning] = helpers.error_messages(@edition.errors)
       render action: :edit
     end
   end
@@ -45,6 +47,7 @@ class EditionsController < ApplicationController
   # DELETE /editions/:id
   def destroy
     @edition&.destroy
+    flash[:success] = 'Edition was successfully deleted.'
     redirect_to editions_path
   end
 
@@ -55,7 +58,7 @@ class EditionsController < ApplicationController
   # POST /editions/:id/import
   def import
     if @edition&.import_csv(params[:file])
-      redirect_to edition_path(@edition), notice: 'Edition details were imported!'
+      redirect_to edition_path(@edition), success: 'Edition details were imported!'
     else
       render action: :new_import
     end

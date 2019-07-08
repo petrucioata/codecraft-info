@@ -2,5 +2,6 @@
 
 <%= render 'form', edition: @edition %>
 
-<%= link_to 'Editions', editions_path %>
-<%= link_to 'Show', edition_path(@edition) %>
+<hr>
+<%= link_to 'Editions', editions_path, class: 'btn btn-primary' %>
+<%= link_to 'Show', edition_path(@edition), class: 'btn btn-primary' %>

@@ -1,9 +1,15 @@
-<h1>Task <%= @task.name %></h1>
+<div class='panel panel-default'>
+  <div class='panel-heading'>
+    <h1>Task: <%= @task.name %></h1>
+  </div>
+  <dl class='dl-horizontal'>
+    <dt>Name:       </dt> <dd><%= @task.name %></dd>
+    <dt>Author:     </dt> <dd><%= @task.author %> </dd>
+    <dt>Description:</dt> <dd><%= @task.description %> </dd>
+    <dt>Edition:    </dt> <dd><%= @task.edition_name %> </dd>
+  </dl>
+</div>
 
-Name: <%= @task.name %> <br />
-Author: <%= @task.author %> <br />
-Description: <%= @task.description %><br>
-Edition: <%= @task.edition_name %> <br />
 <hr>
-<%= link_to 'Edit', edit_task_path(@task) %>
-<%= link_to 'Tasks', tasks_path %>
+<%= link_to 'Edit', edit_task_path(@task), class: 'btn btn-primary' %>
+<%= link_to 'Tasks', tasks_path, class: 'btn btn-primary' %>

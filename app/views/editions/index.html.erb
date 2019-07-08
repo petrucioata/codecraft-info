@@ -27,10 +27,10 @@
   <% end %>
 </table>
 
-<div class="text-center">
+<hr>
+<div class='text-center'>
   <%= will_paginate @editions, renderer: BootstrapPagination::Rails,
     :previous_label => '<<', :next_label => '>>' %>
 </div>
-<br>
 
 <%= link_to 'New Edition', new_edition_path, class: 'btn btn-primary'%>
