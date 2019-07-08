@@ -19,6 +19,17 @@
     <%= f.select :edition_id, Edition.all.map{ |p| [p.name, p.id] }, { include_blank: true }, { class: 'form-control' } %>
   </div>
 
+  <%= f.label :test_cases %><br />
+  <div class='input-group'>
+    <span class='input-group-btn'>
+      <span class='btn btn-small btn-primary btn-inverse' onclick="$(this).parent().find('input[type=file]').click();">
+        Browse
+      </span>
+        <%= f.file_field :test_cases,  multiple: true, onchange: "$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\\\|/]/).pop());", style: 'display: none;' %>
+    </span>
+    <span class='form-control'></span>
+  </div>
+
   <br />
   <div class='actions'>
     <%= f.submit class: 'btn btn-primary' %>
