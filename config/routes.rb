@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   get 'editions/:id/import', to: 'editions#new_import', as: 'new_import_edition'
   post 'editions/:id', to: 'editions#import', as: 'import_edition'
+  get '/admin', to: 'sessions#new'
+  post '/admin', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 
   resources :editions
   resources :tasks
