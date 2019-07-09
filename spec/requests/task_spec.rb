@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :request do
   let!(:task) { create(:task, :for_edition) }
+  let(:file_name) { 'test_case.txt' }
+  let(:file) { fixture_file_upload(file_name, 'text') }
 
   describe 'lists all tasks' do
     subject(:list_tasks) { get tasks_path }
@@ -27,7 +29,8 @@ RSpec.describe 'Tasks', type: :request do
         "name": Faker::Lorem.sentence,
         "author": Faker::FunnyName.name,
         "description": Faker::Quote.yoda,
-        "edition": task.edition_id
+        "edition": task.edition_id,
+        "test_cases": [Rack::Test::UploadedFile.new(file)]
       }
     end
 
@@ -40,6 +43,7 @@ RSpec.describe 'Tasks', type: :request do
       end
 
       it { expect { create_task }.to change(Task, :count).by(1) }
+      it { expect { create_task }.to change(ActiveStorage::Attachment, :count).by(1) }
 
       it "redirect to the Task's page" do
         create_task
@@ -82,13 +86,18 @@ RSpec.describe 'Tasks', type: :request do
 
     context 'when the params are correct' do
       let(:params) do
-        { "name": Faker::Lorem.sentence }
+        {
+          "name": Faker::Lorem.sentence,
+          "test_cases": [Rack::Test::UploadedFile.new(file)]
+        }
       end
 
       it 'updates the task' do
         update_task
         expect(task.reload.name).to eq params[:name]
       end
+
+      it { expect { update_task }.to change(ActiveStorage::Attachment, :count).by(1) }
 
       it "redirects to Task's page" do
         update_task

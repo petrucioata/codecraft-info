@@ -16,6 +16,7 @@ Things you may want to cover:
 * Configuration
   ```
   cp config/samples/local_env.yml config
+  cp config/samples/storage.yml config
   ```
   Update `config/local_env.yml` with your corresponding values
 
