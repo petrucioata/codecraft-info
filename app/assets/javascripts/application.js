@@ -18,4 +18,8 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require bootstrap
+//= require am_chart/core
+//= require am_chart/charts
+//= require am_chart/animated
+//= require am_chart/amcharts
 //= require_tree .
