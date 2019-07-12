@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Editions', type: :request do
   let!(:edition) { create(:edition) }
   let(:other_edition) { create(:edition) }
+  let!(:user) { create(:user, password: 'pass123') }
 
   describe 'lists all editions' do
     subject(:list_editions) { get editions_path }
@@ -22,6 +23,8 @@ RSpec.describe 'Editions', type: :request do
 
   describe 'creates a new Edition' do
     subject(:create_edition) { post editions_path, params: { edition: params } }
+
+    before { login(user.email, 'pass123') }
 
     let(:new_edition) { get new_edition_path }
     let(:params) do
@@ -73,6 +76,8 @@ RSpec.describe 'Editions', type: :request do
       patch edition_path(edition), params: { edition: params }
     end
 
+    before { login(user.email, 'pass123') }
+
     context 'when the params are correct' do
       let(:params) do
         { "name": Faker::App.name }
@@ -111,6 +116,8 @@ RSpec.describe 'Editions', type: :request do
   describe 'deletes an Edition' do
     subject(:delete_edition) { delete edition_path(edition) }
 
+    before { login(user.email, 'pass123') }
+
     context 'when the edition is find' do
       it { expect { delete_edition }.to change(Edition, :count).by(-1) }
 
@@ -126,6 +133,8 @@ RSpec.describe 'Editions', type: :request do
     subject(:import_edition) do
       post import_edition_path(edition), params: { file: Rack::Test::UploadedFile.new(file) }
     end
+
+    before { login(user.email, 'pass123') }
 
     let(:new_import_edition) { get new_import_edition_path(edition) }
     let(:file) { fixture_file_upload(file_name) }
