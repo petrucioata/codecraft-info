@@ -14,18 +14,17 @@ RSpec.describe 'Sessions', type: :request do
   end
 
   describe 'login a user' do
-    before do
-      login_url
-    end
-
     context 'when the credentials are correct' do
       it 'returns a successful response' do
+        login_url
         follow_redirect!
 
         expect(response.body).to include('Admin was authenticated.')
       end
 
       it 'renders the root template' do
+        login_url
+
         expect(response).to redirect_to(root_path)
       end
     end
@@ -39,10 +38,14 @@ RSpec.describe 'Sessions', type: :request do
       end
 
       it 're-renders the login page' do
+        login_url
+
         expect(response).to render_template(:new)
       end
 
       it 'displays correct message' do
+        login_url
+
         expect(response.body).to include('Wrong credentials.')
       end
     end
@@ -51,21 +54,21 @@ RSpec.describe 'Sessions', type: :request do
   describe 'logout a user' do
     subject(:logout_url) { delete '/logout', params: { user_id: user.id } }
 
-    before do
-      login_url
-    end
+    before { login_url }
 
-    it 'returns a successful response' do
-      logout_url
-      follow_redirect!
+    context 'when the user is logged in' do
+      it 'returns a successful response' do
+        logout_url
+        follow_redirect!
 
-      expect(response.body).to include('Admin was logged out.')
-    end
+        expect(response.body).to include('Admin was logged out.')
+      end
 
-    it 'renders the root template' do
-      logout_url
+      it 'renders the root template' do
+        logout_url
 
-      expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 end
