@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       flash[:success] = 'Admin was authenticated.'
       redirect_to root_path
     else
-      flash[:warning] = 'Wrong credentials'
+      flash[:warning] = 'Wrong credentials.'
       render :new
     end
   end
