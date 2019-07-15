@@ -19,6 +19,8 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:user_id)
+    flash[:success] = 'Admin was logged out.'
+    redirect_to root_path
   end
 
   private
