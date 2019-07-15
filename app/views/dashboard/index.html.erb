@@ -1,13 +1,13 @@
 <h1> CodeCraft Info statistics </h1>
 
 <h1> Total number of participants per edition</h1>
-<%= render 'charts/x_y_chart', editions: @editions, chart_id: "chartdiv_xy", value: { name: "name", number: "number" } %>
+<%= render 'charts/x_y_chart', editions: @participants_per_edition, chart_id: "chartdiv_xy", value: { name: "name", number: "number" } %>
 <div id="chartdiv_xy" style="width: 50%; height: 300;"></div>
 
 <hr>
 
 <h1> Total number of participants per edition(pie chart) </h1>
-<%= render 'charts/pie_chart', editions: @editions, chart_id: "chartdiv_pie", value: { name: "name", number: "number" } %>
+<%= render 'charts/pie_chart', editions: @participants_per_edition, chart_id: "chartdiv_pie", value: { name: "name", number: "number" } %>
 <div id="chartdiv_pie" style="width: 50%; height: 200px;"></div>
 
 
