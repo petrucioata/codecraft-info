@@ -1,18 +1,13 @@
-<h1> Dashboard </h1>
+<h1> CodeCraft Info statistics </h1>
 
-<h1>XY Chart </h1>
-<%= render 'charts/chart_01' %>
-<div id="chartdiv" style="width: 100%; height: 600;"></div>
-
-<hr>
-<h1>XY Chart </h1>
-<%= render 'charts/chart_03' %>
-<div id="chartdiv_03" style="width: 100%; height: 500px;"></div>
+<h1> Total number of participants per edition</h1>
+<%= render 'charts/x_y_chart', editions: @editions, chart_id: "chartdiv_xy", value: { name: "name", number: "number" } %>
+<div id="chartdiv_xy" style="width: 50%; height: 300;"></div>
 
 <hr>
 
-<h1> Pie Chart </h1>
-<%= render 'charts/chart_02' %>
+<h1> Total number of participants per edition(pie chart) </h1>
+<%= render 'charts/pie_chart', editions: @editions, chart_id: "chartdiv_pie", value: { name: "name", number: "number" } %>
 <div id="chartdiv_pie" style="width: 50%; height: 200px;"></div>
 
 

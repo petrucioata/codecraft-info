@@ -1,0 +1,31 @@
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart_pie instance
+var chart_pie = am4core.create("<%= chart_id %>", am4charts.PieChart);
+
+// Add data from controller
+chart_pie.data = <%= raw editions.to_json %>;
+
+// Set inner radius
+chart_pie.innerRadius = am4core.percent(50);
+
+// Add and configure Series
+var pieSeries = chart_pie.series.push(new am4charts.PieSeries());
+pieSeries.dataFields.value = "<%= value[:number] %>";
+pieSeries.dataFields.category = "<%= value[:name] %>";
+pieSeries.slices.template.stroke = am4core.color("#fff");
+pieSeries.slices.template.strokeWidth = 2;
+pieSeries.slices.template.strokeOpacity = 1;
+
+// This creates initial animation
+pieSeries.hiddenState.properties.opacity = 1;
+pieSeries.hiddenState.properties.endAngle = -90;
+pieSeries.hiddenState.properties.startAngle = -90;
+
+}); // end am4core.ready()
+</script>
