@@ -29,7 +29,7 @@ RSpec.describe 'Sessions', type: :request do
         expect(response).to redirect_to(root_path)
       end
     end
-    
+
     context 'when the credentials are incorrect' do
       let(:params) do
         {
