@@ -26,7 +26,7 @@ RSpec.describe 'Tasks', type: :request do
   describe 'create a new Task' do
     subject(:create_task) { post tasks_path, params: { task: params } }
 
-    before { login(user.email, 'pass123') }
+    before { login(user.email, password) }
 
     let(:params) do
       {
@@ -88,7 +88,7 @@ RSpec.describe 'Tasks', type: :request do
   describe 'updates a Task' do
     subject(:update_task) { patch task_path(task), params: { task: params } }
 
-    before { login(user.email, 'pass123') }
+    before { login(user.email, password) }
 
     context 'when the params are correct' do
       let(:params) do
@@ -135,7 +135,7 @@ RSpec.describe 'Tasks', type: :request do
   describe 'deletes a Task' do
     subject(:delete_task) { delete task_path(task) }
 
-    before { login(user.email, 'pass123') }
+    before { login(user.email, password) }
 
     context 'when the task is find' do
       it { expect { delete_task }.to change(Task, :count).by(-1) }
