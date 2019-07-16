@@ -13,10 +13,6 @@
   
   <div class='container'>
     <body>
-      	
-      <% if current_user %>
-        <%= "Logged in as #{current_user.email}" %> | <%= link_to 'Home', root_path %> | <%= link_to 'Log Out', logout_path, method: :delete %>
-      <% end %>
       <%= render partial: 'partials/alerts' %>
       <%= yield %>
     </body>
