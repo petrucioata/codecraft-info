@@ -45,5 +45,7 @@
 </div>
 
 <hr>
-<%= link_to 'Edit', edit_participant_path(@participant), class: 'btn btn-primary' %>
+<% if current_user %>
+  <%= link_to 'Edit', edit_participant_path(@participant), class: 'btn btn-primary' %>
+<% end %>
 <%= link_to 'Participants', participants_path, class: 'btn btn-primary' %>

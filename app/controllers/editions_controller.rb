@@ -2,7 +2,7 @@
 
 class EditionsController < ApplicationController
   before_action :set_edition, only: %i[show edit update destroy new_import import]
-  before_action :authorize, only: %i[edit update destroy new_import import]
+  before_action :authorize, only: %i[new create edit update destroy new_import import]
 
   # GET /editions
   def index

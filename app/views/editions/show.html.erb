@@ -50,5 +50,7 @@
 </div>
 
 <hr>
-<%= link_to 'Edit', edit_edition_path(@edition), class: 'btn btn-primary' %>
+<% if current_user %>
+  <%= link_to 'Edit', edit_edition_path(@edition), class: 'btn btn-primary' %>
+<% end %>
 <%= link_to 'Editions', editions_path, class: 'btn btn-primary' %>

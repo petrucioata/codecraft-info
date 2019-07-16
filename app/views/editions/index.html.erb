@@ -18,10 +18,12 @@
       <td><%= edition.participants.size %></td>
       <td>
         <%= link_to 'Show', edition_path(edition), class: 'btn btn-primary' %>
-        <%= link_to 'Edit', edit_edition_path(edition), class: 'btn btn-primary' %>
-        <%= link_to 'Import', new_import_edition_path(edition), class: 'btn btn-primary' %>
-        <%= link_to 'Destroy', edition_path(edition), class: 'btn btn-primary',
-          data: {:confirm => 'Are you sure?'}, :method => :delete %>
+        <% if current_user %>
+          <%= link_to 'Edit', edit_edition_path(edition), class: 'btn btn-primary' %>
+          <%= link_to 'Import', new_import_edition_path(edition), class: 'btn btn-primary' %>
+          <%= link_to 'Destroy', edition_path(edition), class: 'btn btn-primary',
+            data: {:confirm => 'Are you sure?'}, :method => :delete %>
+        <% end %>
       </td>
     </tr>
   <% end %>
@@ -33,4 +35,6 @@
     :previous_label => '<<', :next_label => '>>' %>
 </div>
 
-<%= link_to 'New Edition', new_edition_path, class: 'btn btn-primary'%>
+<% if current_user %>
+  <%= link_to 'New Edition', new_edition_path, class: 'btn btn-primary'%>
+<% end %>
