@@ -8,7 +8,7 @@
     chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
     // Add data from controller
-    chart.data = <%= raw editions.to_json %>;
+    chart.data = <%= raw data.to_json %>;
 
     // horizontally
     var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
