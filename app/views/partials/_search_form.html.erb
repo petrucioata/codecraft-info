@@ -1,0 +1,8 @@
+<%= form_tag(url, :method => "get", id: "search-form") do %>
+  <div class="input-group">
+    <%= text_field_tag :searched_text, params[:searched_text], placeholder: "Search", class: 'form-control' %>
+    <div class="input-group-append">
+      <%= submit_tag "Search", class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
