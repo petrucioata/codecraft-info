@@ -9,7 +9,7 @@ am4core.useTheme(am4themes_animated);
 var chart_pie = am4core.create("<%= chart_id %>", am4charts.PieChart);
 
 // Add data from controller
-chart_pie.data = <%= raw editions.to_json %>;
+chart_pie.data = <%= raw data.to_json %>;
 
 // Set inner radius
 chart_pie.innerRadius = am4core.percent(50);
