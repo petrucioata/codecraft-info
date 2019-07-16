@@ -13,4 +13,10 @@ class Participant < ApplicationRecord
   def position_name
     position&.short_name || 'None'
   end
+
+  def self.search(params)
+    participants = Participant.all
+    participants = participants.where('first_name LIKE ? or last_name LIKE ?', "%#{params[:searched_text]}%", "%#{params[:searched_text]}%") if params[:searched_text].present?
+    participants
+  end
 end

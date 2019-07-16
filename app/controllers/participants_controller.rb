@@ -6,7 +6,7 @@ class ParticipantsController < ApplicationController
 
   # GET /participants
   def index
-    @participants = Participant.paginate(page: params[:page])
+    @participants = Participant.search(params).paginate(page: params[:page])
   end
 
   # GET /participants/:id
