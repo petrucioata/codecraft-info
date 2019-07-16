@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Participant', type: :request do
   let!(:participant) { create(:participant) }
-  let!(:user) { create(:user, password: 'pass123') }
+  let(:password) { 'pass123' }
+  let!(:user) { create(:user, password: password) }
 
   describe 'list all participants' do
     subject(:list_participants) { get participants_path }

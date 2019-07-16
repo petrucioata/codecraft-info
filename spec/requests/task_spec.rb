@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :request do
   let!(:task) { create(:task, :for_edition) }
-  let!(:user) { create(:user, password: 'pass123') }
+  let(:password) { 'pass123' }
+  let!(:user) { create(:user, password: password) }
   let(:file_name) { 'test_case.txt' }
   let(:file) { fixture_file_upload(file_name, 'text') }
 
