@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'simplecov'
+require 'request_spec_helpers'
 
 SimpleCov.start 'rails' do
   add_filter '/bin/'
@@ -106,4 +107,5 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+  config.include RequestSpecHelpers, type: :request
 end

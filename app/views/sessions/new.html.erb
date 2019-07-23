@@ -1,0 +1,19 @@
+<div class='col-md-4'>
+  <h1>Log In</h1>
+  <div>
+    <%= form_for :login do |f| %>
+      <div class='field form-group'>
+        <%= f.label :email %>
+        <%= f.text_field :email, autofocus: true, class: 'form-control' %>
+      </div>
+      <div class='field form-group'>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+      <br />
+      <div class='actions'>
+        <%= f.submit "Log In", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -5,7 +5,7 @@
   <dl class='dl-horizontal'>
     <dt>Topic:</dt> <dd><%= @edition.topic %> <br></dd>
     <dt>Date: </dt> <dd><%= romanian_format(@edition.date) %><br></dd>
-    <dt>Link: </dt> <dd><%= link_to 'Edition link', @edition.link %></dd>
+    <dt>Link: </dt> <dd><%= link_to 'CodeSignal link', @edition.link, target: '_blank' %></dd>
   </dl>
 </div>
 
@@ -50,5 +50,7 @@
 </div>
 
 <hr>
-<%= link_to 'Edit', edit_edition_path(@edition), class: 'btn btn-primary' %>
+<% if current_user %>
+  <%= link_to 'Edit', edit_edition_path(@edition), class: 'btn btn-primary' %>
+<% end %>
 <%= link_to 'Editions', editions_path, class: 'btn btn-primary' %>

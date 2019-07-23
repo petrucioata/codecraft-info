@@ -18,9 +18,11 @@
       <td><%= participant.position_name %></td>
       <td>
         <%= link_to 'Show', participant_path(participant), class: 'btn btn-primary' %>
-        <%= link_to 'Edit', edit_participant_path(participant), class: 'btn btn-primary' %>
-        <%= link_to 'Destroy', participant_path(participant), class: 'btn btn-primary',
-          data: {:confirm => 'Are you sure?'}, :method => :delete %>
+        <% if current_user %>
+          <%= link_to 'Edit', edit_participant_path(participant), class: 'btn btn-primary' %>
+          <%= link_to 'Destroy', participant_path(participant), class: 'btn btn-primary',
+            data: {:confirm => 'Are you sure?'}, :method => :delete %>
+        <% end %>
       </td>
     </tr>
   <% end %>
@@ -32,4 +34,6 @@
 </div>
 
 <hr>
-<%= link_to 'New Participant', new_participant_path, class: 'btn btn-primary' %>
+<% if current_user %>
+  <%= link_to 'New Participant', new_participant_path, class: 'btn btn-primary' %>
+<% end %>

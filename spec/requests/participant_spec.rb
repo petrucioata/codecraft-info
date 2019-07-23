@@ -4,6 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Participant', type: :request do
   let!(:participant) { create(:participant) }
+  let(:password) { 'pass123' }
+  let!(:user) { create(:user, password: password) }
 
   describe 'list all participants' do
     subject(:list_participants) { get participants_path }
@@ -23,6 +25,8 @@ RSpec.describe 'Participant', type: :request do
     subject(:create_participant) do
       post participants_path, params: { participant: params }
     end
+
+    before { login(user.email, password) }
 
     let(:new_participant) { get new_participant_path }
     let(:params) do
@@ -65,6 +69,8 @@ RSpec.describe 'Participant', type: :request do
       patch participant_path(participant), params: { participant: params }
     end
 
+    before { login(user.email, password) }
+
     context 'when the params are correct' do
       let(:params) do
         {
@@ -105,6 +111,8 @@ RSpec.describe 'Participant', type: :request do
 
   describe 'deletes a Participant' do
     subject(:delete_participant) { delete participant_path(participant) }
+
+    before { login(user.email, password) }
 
     context 'when the participant is find' do
       it { expect { delete_participant }.to change(Participant, :count).by(-1) }

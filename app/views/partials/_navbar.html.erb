@@ -17,6 +17,10 @@
         <li> <%= link_to 'Tasks', tasks_path, class: 'nav-item'%> </li>
       </ul>
       <ul class='nav navbar-nav navbar-right'>
+       <% if current_user %>
+          <li class="navbar-text">  <%= "Logged in as #{current_user.email}" %> </li>
+          <li> <%= link_to 'Log Out', logout_path, class: 'nav-item', method: :delete %> </li>
+        <% end %>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container-fluid -->

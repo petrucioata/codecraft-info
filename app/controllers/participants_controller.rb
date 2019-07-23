@@ -2,6 +2,7 @@
 
 class ParticipantsController < ApplicationController
   before_action :set_participant, only: %i[show edit update destroy]
+  before_action :authorize, only: %i[new create edit update destroy]
 
   # GET /participants
   def index

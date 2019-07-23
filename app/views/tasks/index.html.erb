@@ -18,9 +18,11 @@
       <td><%= task.edition_name %></td>
       <td>
         <%= link_to 'Show', task_path(task), class: 'btn btn-primary' %>
-        <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-primary' %>
-        <%= link_to 'Destroy', task_path(task), class: 'btn btn-primary',
-          data: {:confirm => 'Are you sure?'}, :method => :delete %>
+        <% if current_user %>
+          <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-primary' %>
+          <%= link_to 'Destroy', task_path(task), class: 'btn btn-primary',
+            data: {:confirm => 'Are you sure?'}, :method => :delete %>
+        <% end %>
       </td>
     </tr>
   <% end %>
@@ -31,5 +33,8 @@
       :previous_label => '<<', :next_label => '>>' %>
 </div>
 
+  
 <hr>
-<%= link_to 'New task', new_task_path, class: 'btn btn-primary'%>
+<% if current_user %>
+  <%= link_to 'New task', new_task_path, class: 'btn btn-primary'%>
+<% end %>
