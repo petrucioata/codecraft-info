@@ -8,6 +8,12 @@ am4core.useTheme(am4themes_animated);
 // Create chart_pie instance
 var chart_pie = am4core.create("<%= chart_id %>", am4charts.PieChart);
 
+// Chart Title
+var title = chart_pie.titles.create();
+title.text = "No. participants";
+title.fontSize = 20;
+title.marginBottom = 30;
+
 // Add data from controller
 chart_pie.data = <%= raw data.to_json %>;
 
