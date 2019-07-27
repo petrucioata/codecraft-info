@@ -1,13 +1,18 @@
-<h1> CodeCraft Info statistics </h1>
+<div class='container'>
+  <div class='row'>
+    <%= render 'charts/stacked_area', data: @participants_per_edition, chart_id: "chart_stacked_area", value: { name: "name", number: "number", with_points: "with_points" } %>
+    <div id="chart_stacked_area" style="height: 300px;"></div>
+  </div>
 
-<h1> Total number of participants per edition</h1>
-<%= render 'charts/simple_column', data: @participants_per_edition, chart_id: "chart_simple_column", value: { name: "name", number: "number" } %>
-<div id="chart_simple_column" style="width: 50%; height: 300;"></div>
+  <div class='row'>
+    <div class='col-xs-6'>
+      <%= render 'charts/simple_column', data: @participants_per_edition, chart_id: "chart_simple_column", value: { name: "name", number: "number" } %>
+      <div id="chart_simple_column" style="width: 90%; height: 300px;"></div>
+    </div>
 
-<hr>
-
-<h1> Total number of participants per edition(pie chart) </h1>
-<%= render 'charts/simple_pie', data: @participants_per_edition, chart_id: "chart_simple_pie", value: { name: "name", number: "number" } %>
-<div id="chart_simple_pie" style="width: 50%; height: 200px;"></div>
-
-
+    <div class='col-xs-6'>
+      <%= render 'charts/simple_pie', data: @participants_per_edition, chart_id: "chart_simple_pie", value: { name: "name", number: "number" } %>
+      <div id="chart_simple_pie" style="width: 90%; height: 300px;"></div>
+    </div>
+  </div>
+</div>
