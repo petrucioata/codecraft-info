@@ -7,4 +7,6 @@ class Participation < ApplicationRecord
 
   validates :total_points, numericality: { only_integer: true }
   validates :participant_id, uniqueness: { scope: :edition_id }
+
+  scope :with_points, -> { where('total_points > 0').count }
 end
