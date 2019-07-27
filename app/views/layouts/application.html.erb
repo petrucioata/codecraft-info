@@ -5,12 +5,17 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= javascript_include_tag 'https://www.amcharts.com/lib/4/core.js' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_include_tag 'https://www.amcharts.com/lib/4/charts.js' %>
+    <%= javascript_include_tag 'https://www.amcharts.com/lib/4/themes/animated.js' %>
+    <%= javascript_include_tag 'https://www.amcharts.com/lib/4/themes/amcharts.js' %>
   </head>
 
   <%= render 'partials/navbar' %>
-  
+
   <div class='container'>
     <body>
       <%= render partial: 'partials/alerts' %>
