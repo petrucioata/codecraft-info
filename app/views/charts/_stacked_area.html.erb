@@ -1,0 +1,53 @@
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+  // Themes begin
+  am4core.useTheme(am4themes_animated);
+  // Themes end
+
+  var chart = am4core.create("<%= chart_id %>", am4charts.XYChart);
+
+  // Chart Title
+  var title = chart.titles.create();
+  title.text = "Total participants vs Participants with points";
+  title.fontSize = 20;
+  title.marginBottom = 30;
+
+  // Add data from controller
+  chart.data = <%= raw data.to_json %>;
+
+  var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+  categoryAxis.dataFields.category = 'name';
+  categoryAxis.startLocation = 0.5;
+  categoryAxis.endLocation = 0.5;
+
+  var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+  var series = chart.series.push(new am4charts.LineSeries());
+  series.name = "Total Participants";
+  series.dataFields.categoryX = "name";
+  series.dataFields.valueY = "number";
+  series.tooltipText = "[#000]Total Participants: {valueY.value}[/]";
+  series.tooltip.background.fill = am4core.color("#FFF");
+  series.tooltip.getStrokeFromObject = true;
+  series.tooltip.background.strokeWidth = 3;
+  series.fillOpacity = 0.6;
+  series.strokeWidth = 2;
+  series.stacked = true;
+
+  var series2 = chart.series.push(new am4charts.LineSeries());
+  series2.name = 'With points';
+  series2.dataFields.categoryX = "name";
+  series2.dataFields.valueY = 'with_points';
+  series2.tooltipText = "[#000]More than 0 points: {valueY.value}[/]";
+  series2.tooltip.background.fill = am4core.color("#FFF");
+  series2.tooltip.getStrokeFromObject = true;
+  series2.tooltip.background.strokeWidth = 3;
+  series2.fillOpacity = 0.6;
+  series2.strokeWidth = 2;
+
+  chart.cursor = new am4charts.XYCursor();
+  chart.cursor.xAxis = categoryAxis;
+  chart.scrollbarX = new am4core.Scrollbar();
+});
+</script>
