@@ -11,7 +11,7 @@ RSpec.describe 'Dashboard', type: :request do
     before { dashboard }
 
     it { expect(response).to be_successful }
-    it { expect(response.body).to include(edition.name) }
+    it { expect(response.body).to include(edition.date.strftime('%b%y')) }
     it { expect(response.body).to include(edition.participants.count.to_s) }
   end
 end
