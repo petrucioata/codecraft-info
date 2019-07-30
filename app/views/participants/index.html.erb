@@ -1,6 +1,10 @@
-<h1>CodeCraft participants</h1>
-
-<%= render 'partials/search_form', url: participants_path %>
+<%= render 'partials/search_form',
+  url: participants_path,
+  placeholder: 'Search for first and last name',
+  select_tag_id: :position_id,
+  select_opts: @positions,
+  default_option: 'Select position'
+%>
 
 <table class='table'>
   <thead class='thead-dark'>
