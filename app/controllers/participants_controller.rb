@@ -6,7 +6,8 @@ class ParticipantsController < ApplicationController
 
   # GET /participants
   def index
-    @participants = Participant.paginate(page: params[:page])
+    @participants = Participant.search(params).paginate(page: params[:page])
+    @positions = Position.pluck(:short_name, :id)
   end
 
   # GET /participants/:id

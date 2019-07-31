@@ -1,0 +1,15 @@
+<%= form_tag(url, :method => "get", id: "search-form") do %>
+  <div class="row no-gutter">
+    <div class="col-md-2">
+      <%= select_tag select_tag_id, options_for_select(select_opts), prompt: default_option,
+          class: 'form-control'  %>
+    </div>
+    <div class="col-md-7">
+      <%= text_field_tag :searched_text, params[:searched_text],
+          placeholder: placeholder, class: 'form-control' %>
+    </div>
+    <div class="col-md-3">
+      <%= submit_tag 'Search', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
