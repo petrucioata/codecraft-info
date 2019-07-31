@@ -20,7 +20,7 @@ class Edition < ApplicationRecord
     tasks = find_or_create_tasks(rows.headers[2..4])
 
     rows.each do |row|
-      participant = Participant.where(username: row['username']).first_or_create
+      participant = find_or_create_participant(row['username'])
       participation = find_or_create_participation(participant, row['points'], row['total_time'])
       find_or_create_solutions(participation, tasks, row)
     end
@@ -34,6 +34,13 @@ class Edition < ApplicationRecord
   def find_or_create_tasks(tasks_name)
     tasks_name.each_with_object([]) do |task_name, tasks|
       tasks << Task.where(name: task_name, edition: self).first_or_create
+    end
+  end
+
+  def find_or_create_participant(username)
+    profile_url = 'https://app.codesignal.com/profile'
+    Participant.where(username: username).first_or_create do |participant|
+      participant.link = "#{profile_url}/#{username}"
     end
   end
 
