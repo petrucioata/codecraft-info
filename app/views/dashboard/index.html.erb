@@ -11,7 +11,7 @@
     </div>
 
     <div class='col-xs-6'>
-      <%= render 'charts/simple_pie', data: @participants_per_edition, chart_id: "chart_simple_pie", value: { name: "name", number: "number" } %>
+      <%= render 'charts/simple_pie', data: @implication_level, chart_id: "chart_simple_pie", value: { name: "position", number: "value" } %>
       <div id="chart_simple_pie" style="width: 90%; height: 300px;"></div>
     </div>
   </div>
