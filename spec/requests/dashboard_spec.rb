@@ -17,7 +17,7 @@ RSpec.describe 'Dashboard', type: :request do
     it { expect(response.body).to include(position.short_name) }
 
     it do
-      create_list(:participation, 4, :with_participant, position_id: position.id, edition_id: edition.id)
+      create_list(:participation, 4, :with_participant, position: position.id, edition: edition)
       expect(response.body).to include(position.participants.joins(:participations).count.to_s)
     end
   end

@@ -4,11 +4,11 @@ FactoryBot.define do
   factory :participation do
     trait :with_participant do
       transient do
-        position_id { 0 }
+        position { Position.first }
       end
 
       before(:create) do |participation, evaluator|
-        create(:participant, position_id: evaluator.position_id, participations: [participation])
+        create(:participant, position_id: evaluator.position, participations: [participation])
       end
     end
   end
