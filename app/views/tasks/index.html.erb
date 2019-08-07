@@ -1,3 +1,11 @@
+<%= render 'partials/search_form',
+  url: tasks_path,
+  placeholder: 'Search for name and author',
+  select_tag_id: :edition_id,
+  select_opts: @edition,
+  default_option: 'Select edition'
+%>
+
 <table class='table'>
   <thead class='thead-dark'>
     <tr>
