@@ -10,7 +10,9 @@ class Task < ApplicationRecord
   validates :name, presence: true
 
   scope :by_edition, ->(edition_id) { where(edition_id: edition_id) if edition_id.present? }
-  scope :by_name_or_author, ->(text) { where('name LIKE ? or author LIKE ?', "%#{text}%", "%#{text}%") if text.present? }
+  scope :by_name_or_author, lambda { |text|
+    where('name LIKE ? or author LIKE ?', "%#{text}%", "%#{text}%") if text.present?
+  }
 
   def edition_name
     edition&.name || 'None'
