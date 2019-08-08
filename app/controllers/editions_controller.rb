@@ -11,7 +11,8 @@ class EditionsController < ApplicationController
 
   # GET /editions/:id
   def show
-    @participations = @edition.participations.paginate(page: params[:page])
+    @participations = @edition.participations.search(params).paginate(page: params[:page])
+    @positions = Position.pluck(:short_name, :id)
   end
 
   # GET /editions/new

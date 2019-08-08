@@ -18,33 +18,43 @@
   </div>
 </div>
 
-<% if @participations.size > 0 %>
   <div class='panel panel-default'>
     <div class='panel-heading'>
       <h2>Edition results</h2>
     </div>
-    <table class='table'>
-      <thead class='thead-dark'>
-      <tr>
-        <th>Username</th>
-        <th>Position</th>
-        <th>Total Points</th>
-        <th>Total Time</th>
-      </tr>
-      </thead>
-      <tbody>
-        <% @participations.each do |participation| %>
-          <tr>
-            <td><%= participation.participant.username %></td>
-            <td><%= participation.participant.position_name %></td>
-            <td><%= participation.total_points %></td>
-            <td><%= participation.total_time %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <%= render 'partials/search_form',
+      url: edition_path(@edition),
+      placeholder: 'Search for first and last name',
+      select_tag_id: :position_id,
+      select_opts: @positions,
+      default_option: 'Select position'
+    %>
+    <% if @participations.size > 0 %>
+      <table class='table'>
+        <thead class='thead-dark'>
+        <tr>
+          <th>Username</th>
+          <th>Position</th>
+          <th>Total Points</th>
+          <th>Total Time</th>
+        </tr>
+        </thead>
+        <tbody>
+          <% @participations.each do |participation| %>
+            <tr>
+              <td><%= participation.participant.username %></td>
+              <td><%= participation.participant.position_name %></td>
+              <td><%= participation.total_points %></td>
+              <td><%= participation.total_time %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <br>
+      <p> Unfortunately, no results were found </p>
+    <% end %>
   </div>
-<% end %>
 
 <div class='text-center'>
   <%= will_paginate @participations, renderer: BootstrapPagination::Rails,
