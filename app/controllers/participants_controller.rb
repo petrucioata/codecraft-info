@@ -13,6 +13,9 @@ class ParticipantsController < ApplicationController
   # GET /participants/:id
   def show
     @participations = @participant.participations.paginate(page: params[:page])
+    @chart_data = @participations.map do |participation|
+      { number: participation.total_points, name: participation.edition.name }
+    end
   end
 
   # GET /participants/new

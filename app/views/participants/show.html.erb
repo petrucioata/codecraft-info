@@ -39,6 +39,14 @@
   </div>
 <% end %>
 
+<div>
+  <%= render 'charts/simple_column',
+    data: @chart_data,
+    chart_id: "chart_simple_column_1", value: { name: "name", number: "number" }
+  %>
+  <div id="chart_simple_column_1" style="width: 90%; height: 300px;"></div>
+</div>
+
 <div class='text-center'>
   <%= will_paginate @participations, renderer: BootstrapPagination::Rails,
       :previous_label => '<<', :next_label => '>>' %>
