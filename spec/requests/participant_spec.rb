@@ -22,27 +22,23 @@ RSpec.describe 'Participant', type: :request do
   end
 
   describe 'get one participant' do
-    subject(:show_participant) { get participant_path(params) }
+    subject(:show) { get participant_path(params) }
 
     context 'when the participant has no participations' do
       let(:params) { participant }
 
       it 'returns participant data' do
-        show_participant
+        show
         expect(response).to render_template(:show)
         expect(response.body).not_to include('Editions results')
       end
     end
 
     context 'when the participant has participations' do
-      let(:params) { create(:participant) }
-
-      before do
-        create_list(:participation, 3, participant: params)
-      end
+      let(:params) { create(:participant, :with_participations, count: 4) }
 
       it 'returns the participant and participations' do
-        show_participant
+        show
         expect(response.body).to include('Editions results')
       end
     end
