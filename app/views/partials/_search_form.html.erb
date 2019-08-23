@@ -1,15 +1,18 @@
 <%= form_tag(url, :method => "get", id: "search-form") do %>
-  <div class="row no-gutter">
-    <div class="col-md-2">
+  <div class="row">
+    <div class="col-md-2 nopadding-right">
       <%= select_tag select_tag_id, options_for_select(select_opts), prompt: default_option,
-          class: 'form-control'  %>
+          class: 'form-control no-border'  %>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-7 nopadding">
       <%= text_field_tag :searched_text, params[:searched_text],
-          placeholder: placeholder, class: 'form-control' %>
+          placeholder: placeholder, class: 'form-control no-border' %>
     </div>
-    <div class="col-md-3">
-      <%= submit_tag 'Search', class: 'btn btn-primary' %>
+    <div class="col-md-3 nopadding">
+      <%= button_tag(type: 'submit', class: "btn btn-primary no-border") do %>
+        <span class="glyphicon glyphicon-search"></span>
+      <% end %>
     </div>
   </div>
 <% end %>
+<br>
