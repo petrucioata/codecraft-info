@@ -9,4 +9,15 @@ class Participation < ApplicationRecord
   validates :participant_id, uniqueness: { scope: :edition_id }
 
   scope :with_points, -> { where('total_points > 0').count }
+  scope :by_position, ->(position_id) { where(positions: { id: position_id }) if position_id.present? }
+  scope :by_name, lambda { |text|
+    if text.present?
+      joins(:participant)
+        .where('first_name LIKE ? OR last_name LIKE ?', "%#{text}%", "%#{text}%")
+    end
+  }
+
+  def self.search(params)
+    by_position(params[:position_id]).by_name(params[:searched_text])
+  end
 end
