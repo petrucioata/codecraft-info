@@ -2,7 +2,7 @@
 
 module TasksHelper
     def markdown(text)
-      renderer = Redcarpet::Render::HTML.new(hard_wrap: true, filter_html: true, no_styles: true, hard_wrap: true)
+      renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
       options = {
         autolink: true,
         no_intra_emphasis: true,
