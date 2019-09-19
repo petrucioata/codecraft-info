@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_09_115827) do
+ActiveRecord::Schema.define(version: 2019_09_19_192039) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_07_09_115827) do
     t.string "total_time", default: "00:00:00"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "rank"
     t.index ["edition_id"], name: "index_participations_on_edition_id"
     t.index ["participant_id"], name: "index_participations_on_participant_id"
   end
