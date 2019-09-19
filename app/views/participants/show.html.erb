@@ -20,7 +20,7 @@
       <thead class='thead-dark'>
         <tr>
           <th>Edition name</th>
-          <th>Date</th>
+          <th>Rank</th>
           <th>Total Points</th>
           <th>Total Time</th>
         </tr>
@@ -29,7 +29,7 @@
         <% @participations.each do |participation| %>
           <tr>
             <td><%= participation.edition.name %></td>
-            <td><%= participation.edition.date %></td>
+            <td><%= participation.rank %></td>
             <td><%= participation.total_points %></td>
             <td><%= participation.total_time %></td>
           </tr>
