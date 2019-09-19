@@ -21,7 +21,7 @@ class Edition < ApplicationRecord
 
     rows.each do |row|
       participant = find_or_create_participant(row['username'])
-      participation = find_or_create_participation(participant, row['points'], row['total_time'])
+      participation = find_or_create_participation(participant, row['points'], row['total_time'], row['nr_crt'])
       find_or_create_solutions(participation, tasks, row)
     end
   rescue StandardError => e
@@ -44,10 +44,11 @@ class Edition < ApplicationRecord
     end
   end
 
-  def find_or_create_participation(participant, points, time)
+  def find_or_create_participation(participant, points, time, rank)
     Participation.where(participant: participant, edition: self).first_or_create do |part|
       part.total_points = points
       part.total_time = time
+      part.rank = rank
     end
   end
 
