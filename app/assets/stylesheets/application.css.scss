@@ -26,3 +26,17 @@
   display: inline-block;
   width: auto;
 }
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+.nopadding-right {
+   padding-right: 0 !important;
+   margin: 0 !important;
+}
+
+.no-border {
+  border-radius: 0;
+}

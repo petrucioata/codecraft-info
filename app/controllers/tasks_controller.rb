@@ -6,7 +6,8 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.paginate(page: params[:page])
+    @tasks = Task.search(params).paginate(page: params[:page])
+    @editions = Edition.pluck(:date, :id).map { |ed, id| [ed.strftime('%b%y'), id] }
   end
 
   # GET task/:id

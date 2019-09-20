@@ -6,12 +6,16 @@ class ParticipantsController < ApplicationController
 
   # GET /participants
   def index
-    @participants = Participant.paginate(page: params[:page])
+    @participants = Participant.search(params).paginate(page: params[:page])
+    @positions = Position.pluck(:short_name, :id)
   end
 
   # GET /participants/:id
   def show
     @participations = @participant.participations.paginate(page: params[:page])
+    @chart_data = @participations.map do |participation|
+      { number: participation.total_points, name: participation.edition.name }
+    end
   end
 
   # GET /participants/new

@@ -20,8 +20,8 @@ class Edition < ApplicationRecord
     tasks = find_or_create_tasks(rows.headers[2..4])
 
     rows.each do |row|
-      participant = Participant.where(username: row['username']).first_or_create
-      participation = find_or_create_participation(participant, row['points'], row['total_time'])
+      participant = find_or_create_participant(row['username'])
+      participation = find_or_create_participation(participant, row['points'], row['total_time'], row['nr_crt'])
       find_or_create_solutions(participation, tasks, row)
     end
   rescue StandardError => e
@@ -37,10 +37,18 @@ class Edition < ApplicationRecord
     end
   end
 
-  def find_or_create_participation(participant, points, time)
+  def find_or_create_participant(username)
+    profile_url = 'https://app.codesignal.com/profile'
+    Participant.where(username: username).first_or_create do |participant|
+      participant.link = "#{profile_url}/#{username}"
+    end
+  end
+
+  def find_or_create_participation(participant, points, time, rank)
     Participation.where(participant: participant, edition: self).first_or_create do |part|
       part.total_points = points
       part.total_time = time
+      part.rank = rank
     end
   end
 

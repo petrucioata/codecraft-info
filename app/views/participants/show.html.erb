@@ -20,7 +20,7 @@
       <thead class='thead-dark'>
         <tr>
           <th>Edition name</th>
-          <th>Date</th>
+          <th>Rank</th>
           <th>Total Points</th>
           <th>Total Time</th>
         </tr>
@@ -29,7 +29,7 @@
         <% @participations.each do |participation| %>
           <tr>
             <td><%= participation.edition.name %></td>
-            <td><%= participation.edition.date %></td>
+            <td><%= participation.rank %></td>
             <td><%= participation.total_points %></td>
             <td><%= participation.total_time %></td>
           </tr>
@@ -38,6 +38,15 @@
     </table>
   </div>
 <% end %>
+
+<div>
+  <%= render 'charts/simple_column',
+    data: @chart_data,
+    chart_id: "chart_simple_column_1",
+    value: { name: "name", number: "number", title: "Edition result" }
+  %>
+  <div id="chart_simple_column_1" style="width: 100%; height: 300px;"></div>
+</div>
 
 <div class='text-center'>
   <%= will_paginate @participations, renderer: BootstrapPagination::Rails,

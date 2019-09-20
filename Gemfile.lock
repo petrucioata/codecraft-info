@@ -156,7 +156,7 @@ GEM
     mysql2 (0.5.2)
     nenv (0.3.0)
     nio4r (2.3.1)
-    nokogiri (1.10.3)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -208,6 +208,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    redcarpet (3.5.0)
     regexp_parser (1.5.1)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
@@ -350,6 +351,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.3)
   rails-controller-testing
+  redcarpet
   rspec-rails (~> 3.8)
   rubocop (~> 0.72.0)
   rubocop-performance (~> 1.4)
