@@ -9,6 +9,7 @@ RSpec.describe 'Participant', type: :request do
 
   describe 'list all participants' do
     subject(:list_participants) { get participants_path }
+    before { login(user.email, password) }
 
     it 'returns a successful response' do
       list_participants
@@ -23,6 +24,7 @@ RSpec.describe 'Participant', type: :request do
 
   describe 'get one participant' do
     subject(:show) { get participant_path(params) }
+    before { login(user.email, password) }
 
     context 'when the participant has no participations' do
       let(:params) { participant }
