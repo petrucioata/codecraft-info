@@ -10,7 +10,7 @@ class DashboardController < ApplicationController
   private
 
   def participants_per_edition
-    Edition.all.order(:date).each_with_object([]) do |edition, data|
+    Edition.all_not_deleted.order(:date).each_with_object([]) do |edition, data|
       data << {
         name: edition.date.strftime('%b%y'),
         number: edition.participants.count,
@@ -20,7 +20,7 @@ class DashboardController < ApplicationController
   end
 
   def implication_level
-    Position.all.each_with_object([]) do |position, data|
+    Position.all_not_deleted.each_with_object([]) do |position, data|
       data << {
         position: position.short_name,
         value: position.participants.joins(:participations).count

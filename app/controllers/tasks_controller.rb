@@ -6,8 +6,8 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.search(params).paginate(page: params[:page])
-    @editions = Edition.pluck(:date, :id).map { |ed, id| [ed.strftime('%b%y'), id] }
+    @tasks = Task.all_not_deleted.search(params).paginate(page: params[:page])
+    @editions = Edition.all_not_deleted.pluck(:date, :id).map { |ed, id| [ed.strftime('%b%y'), id] }
   end
 
   # GET task/:id
@@ -47,7 +47,7 @@ class TasksController < ApplicationController
 
   # DELETE /editions/:id
   def destroy
-    @task&.destroy
+    @task&.update!(deleted: true)
     flash[:success] = 'Task was successfully deleted.'
     redirect_to tasks_path
   end

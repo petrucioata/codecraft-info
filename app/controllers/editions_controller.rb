@@ -6,7 +6,7 @@ class EditionsController < ApplicationController
 
   # GET /editions
   def index
-    @editions = Edition.paginate(page: params[:page])
+    @editions = Edition.all_not_deleted.paginate(page: params[:page])
   end
 
   # GET /editions/:id
@@ -16,7 +16,7 @@ class EditionsController < ApplicationController
                       .includes(participant: :position)
                       .search(params)
                       .paginate(page: params[:page])
-    @positions = Position.pluck(:short_name, :id)
+    @positions = Position.all_not_deleted.pluck(:short_name, :id)
   end
 
   # GET /editions/new
@@ -52,7 +52,7 @@ class EditionsController < ApplicationController
 
   # DELETE /editions/:id
   def destroy
-    @edition&.destroy
+    @edition&.update!(deleted: true)
     flash[:success] = 'Edition was successfully deleted.'
     redirect_to editions_path
   end
