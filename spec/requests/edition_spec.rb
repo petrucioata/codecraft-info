@@ -120,7 +120,11 @@ RSpec.describe 'Editions', type: :request do
     before { login(user.email, password) }
 
     context 'when the edition is find' do
-      it { expect { delete_edition }.to change(Edition, :count).by(-1) }
+      it 'sets deleted to true' do
+        delete_edition
+
+        expect(edition.reload.deleted).to eq true
+      end
 
       it 'redirects to editions list' do
         delete_edition

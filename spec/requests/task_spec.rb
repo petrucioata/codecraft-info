@@ -138,7 +138,11 @@ RSpec.describe 'Tasks', type: :request do
     before { login(user.email, password) }
 
     context 'when the task is find' do
-      it { expect { delete_task }.to change(Task, :count).by(-1) }
+      it 'sets deleted to true' do
+        delete_task
+
+        expect(task.reload.deleted).to eq true
+      end
 
       it 'redirects to tasks list' do
         delete_task
