@@ -16,7 +16,7 @@
 
   <div class='field form-group'>
     <%= f.label :edition %><br />
-    <%= f.select :edition_id, Edition.all.map{ |p| [p.name, p.id] }, { include_blank: true }, { class: 'form-control' } %>
+    <%= f.select :edition_id, Edition.all_not_deleted.map{ |p| [p.name, p.id] }, { include_blank: true }, { class: 'form-control' } %>
   </div>
 
   <%= f.label :test_cases %><br />
