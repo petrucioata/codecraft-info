@@ -10,6 +10,7 @@ class Participant < ApplicationRecord
 
   validates :username, presence: true
 
+  scope :all_not_deleted, -> { where(deleted: false) }
   scope :by_position, ->(position_id) { where(position_id: position_id) if position_id.present? }
   scope :by_name, ->(text) { where('first_name LIKE ? or last_name LIKE ?', "%#{text}%", "%#{text}%") if text.present? }
 

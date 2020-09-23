@@ -8,6 +8,7 @@ class Participation < ApplicationRecord
   validates :total_points, numericality: { only_integer: true }
   validates :participant_id, uniqueness: { scope: :edition_id }
 
+  scope :all_not_deleted, -> { where(deleted: false) }
   scope :with_points, -> { where('total_points > 0').count }
   scope :by_position, ->(position_id) { where(positions: { id: position_id }) if position_id.present? }
   scope :by_name, lambda { |text|
