@@ -4,6 +4,7 @@ class CreatePositions < ActiveRecord::Migration[5.2]
       t.string :short_name
       t.string :long_name
       t.text :description
+      t.boolean :deleted, default: false
 
       t.timestamps
     end
