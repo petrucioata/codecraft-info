@@ -6,8 +6,8 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all_not_deleted.search(params).paginate(page: params[:page])
-    @editions = Edition.all_not_deleted.pluck(:date, :id).map { |ed, id| [ed.strftime('%b%y'), id] }
+    @tasks = Task.not_deleted.search(params).paginate(page: params[:page])
+    @editions = Edition.not_deleted.pluck(:date, :id).map { |ed, id| [ed.strftime('%b%y'), id] }
   end
 
   # GET task/:id

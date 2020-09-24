@@ -15,7 +15,7 @@ class Edition < ApplicationRecord
   validates :link, presence: true
   validates :date, presence: true
 
-  scope :all_not_deleted, -> { where(deleted: false) }
+  scope :not_deleted, -> { where(deleted: false) }
 
   def import_csv(file)
     rows = CSV.read(file.path, headers: true)

@@ -6,8 +6,8 @@ class ParticipantsController < ApplicationController
 
   # GET /participants
   def index
-    @participants = Participant.all_not_deleted.search(params).paginate(page: params[:page])
-    @positions = Position.all_not_deleted.pluck(:short_name, :id)
+    @participants = Participant.not_deleted.search(params).paginate(page: params[:page])
+    @positions = Position.not_deleted.pluck(:short_name, :id)
   end
 
   # GET /participants/:id

@@ -6,7 +6,7 @@ class EditionsController < ApplicationController
 
   # GET /editions
   def index
-    @editions = Edition.all_not_deleted.paginate(page: params[:page])
+    @editions = Edition.not_deleted.paginate(page: params[:page])
   end
 
   # GET /editions/:id
@@ -16,7 +16,7 @@ class EditionsController < ApplicationController
                       .includes(participant: :position)
                       .search(params)
                       .paginate(page: params[:page])
-    @positions = Position.all_not_deleted.pluck(:short_name, :id)
+    @positions = Position.not_deleted.pluck(:short_name, :id)
   end
 
   # GET /editions/new
