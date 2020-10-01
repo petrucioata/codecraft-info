@@ -6,6 +6,7 @@ class CreateParticipants < ActiveRecord::Migration[5.2]
       t.string :last_name
       t.string :link
       t.references :position, foreign_key: true
+      t.boolean :deleted, default: false
 
       t.timestamps
     end

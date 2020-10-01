@@ -6,8 +6,8 @@ class ParticipantsController < ApplicationController
 
   # GET /participants
   def index
-    @participants = Participant.search(params).paginate(page: params[:page])
-    @positions = Position.pluck(:short_name, :id)
+    @participants = Participant.not_deleted.search(params).paginate(page: params[:page])
+    @positions = Position.not_deleted.pluck(:short_name, :id)
   end
 
   # GET /participants/:id
@@ -51,7 +51,7 @@ class ParticipantsController < ApplicationController
 
   # DELETE /participants/:id
   def destroy
-    @participant&.destroy
+    @participant&.update!(deleted: true)
     flash[:success] = 'Participant was successfully deleted.'
     redirect_to participants_path
   end

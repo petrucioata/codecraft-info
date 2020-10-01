@@ -5,6 +5,7 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       t.string :author
       t.text :description
       t.references :edition, foreign_key: true
+      t.boolean :deleted, default: false
 
       t.timestamps
     end
