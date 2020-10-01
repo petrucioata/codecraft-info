@@ -6,7 +6,7 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.not_deleted.search(params).paginate(page: params[:page])
+    @tasks = Task.not_deleted.includes(:edition).search(params).paginate(page: params[:page])
     @editions = Edition.not_deleted.pluck(:date, :id).map { |ed, id| [ed.strftime('%b%y'), id] }
   end
 
