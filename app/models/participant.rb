@@ -23,6 +23,6 @@ class Participant < ApplicationRecord
   end
 
   def self.search(params)
-    all.by_name(params[:searched_text]).by_position(params[:position_id])
+    not_deleted.includes(:position).by_name(params[:searched_text]).by_position(params[:position_id])
   end
 end

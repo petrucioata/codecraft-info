@@ -20,6 +20,6 @@ class Task < ApplicationRecord
   end
 
   def self.search(params)
-    all.by_name_or_author(params[:searched_text]).by_edition(params[:edition_id])
+    not_deleted.includes(:edition).by_name_or_author(params[:searched_text]).by_edition(params[:edition_id])
   end
 end
