@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  dates = (DateTime.new(2000, 12).to_date..DateTime.new(2019, 12).to_date).select { |d| d.day == 1 }
+  dates = (Time.zone.today.beginning_of_month - 10.years).step(Time.zone.today.end_of_month, 31).to_a
 
   factory :edition do
     name { Faker::Name.first_name }
