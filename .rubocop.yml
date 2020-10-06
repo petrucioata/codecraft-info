@@ -34,3 +34,6 @@ Style/BlockComments:
 
 RSpec/LetSetup:
   Enabled: false
+
+RSpec/ImplicitExpect:
+  Enabled: false
