@@ -3,19 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe Position, type: :model do
-  subject(:position) { described_class.new(short_name: short_name, long_name: long_name) }
-
-  context 'when required properties are missing' do
-    let(:short_name) { nil }
-    let(:long_name) { nil }
-
-    it { expect(position).not_to be_valid }
+  describe 'associations' do
+    it { should have_many(:participants).dependent(:nullify) }
   end
 
-  context 'when required properties are provided' do
-    let(:short_name) { 'SDE test' }
-    let(:long_name) { 'Software Development Engineer test' }
-
-    it { expect(position).to be_valid }
+  describe 'validations' do
+    it { should validate_presence_of(:short_name) }
+    it { should validate_presence_of(:long_name) }
+    it { should validate_uniqueness_of(:short_name) }
   end
 end

@@ -49,4 +49,20 @@ RSpec.describe Edition, type: :model do
       end
     end
   end
+
+  describe 'associations' do
+    it { should have_many(:participations).dependent(:destroy) }
+    it { should have_many(:participants).through(:participations) }
+    it { should have_many(:tasks).dependent(:nullify) }
+  end
+
+  describe 'validations' do
+    subject { build(:edition) }
+
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:link) }
+    it { should validate_presence_of(:date) }
+    it { should validate_uniqueness_of(:name) }
+    it { should validate_uniqueness_of(:link) }
+  end
 end
