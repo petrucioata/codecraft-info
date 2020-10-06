@@ -68,6 +68,8 @@ class Edition < ApplicationRecord
   end
 
   def valid_date?
+    return false if date.nil?
+
     Edition.not_deleted.where.not(id: id).pluck(:date).all? { |d| d.strftime('%Y-%m') != date.strftime('%Y-%m') }
   end
 
