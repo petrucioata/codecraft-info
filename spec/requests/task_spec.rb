@@ -14,7 +14,7 @@ RSpec.describe 'Tasks', type: :request do
 
     it 'returns a successful response' do
       list_tasks
-      expect(response).to be_successful
+      response.should be_successful
     end
 
     it 'renders the index template' do
