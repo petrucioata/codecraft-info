@@ -23,9 +23,7 @@ RSpec.describe 'Sessions', type: :request do
       end
 
       it 'renders the root template' do
-        login_url
-
-        expect(response).to redirect_to(root_path)
+        login_url.should redirect_to(root_path)
       end
     end
 
@@ -39,13 +37,11 @@ RSpec.describe 'Sessions', type: :request do
 
       it 're-renders the login page' do
         login_url
-
-        expect(response).to render_template(:new)
+        response.should render_template(:new)
       end
 
       it 'displays correct message' do
         login_url
-
         expect(response.body).to include('Wrong credentials.')
       end
     end
@@ -65,9 +61,7 @@ RSpec.describe 'Sessions', type: :request do
       end
 
       it 'renders the root template' do
-        logout_url
-
-        expect(response).to redirect_to(root_path)
+        logout_url.should redirect_to(root_path)
       end
     end
   end

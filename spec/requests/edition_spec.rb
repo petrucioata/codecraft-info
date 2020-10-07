@@ -13,12 +13,12 @@ RSpec.describe 'Editions', type: :request do
 
     it 'returns a successful response' do
       list_editions
-      expect(response).to be_successful
+      response.should be_successful
     end
 
     it 'renders the index template' do
       list_editions
-      expect(response).to render_template(:index)
+      response.should render_template(:index)
     end
   end
 
@@ -40,17 +40,16 @@ RSpec.describe 'Editions', type: :request do
     context 'when the required params are provided' do
       it 'renders new Edition view' do
         new_edition
-        expect(response).to render_template(:new)
+        response.should render_template(:new)
       end
 
       it { expect { create_edition }.to change(Edition, :count).by(1) }
 
       it "redirect to the Edition's page" do
-        create_edition
-        redirect_to(assigns(:edition))
+        create_edition.should redirect_to(assigns(:edition))
         follow_redirect!
 
-        expect(response).to render_template(:show)
+        response.should render_template(:show)
         expect(response.body).to include('Edition was successfully created.')
       end
     end
@@ -66,7 +65,7 @@ RSpec.describe 'Editions', type: :request do
       it 'renders new Edition view with the corresponding error' do
         create_edition
 
-        expect(response).to render_template(:new)
+        response.should render_template(:new)
         expect(response.body).to include('Link can&#39;t be blank')
       end
     end
@@ -90,8 +89,7 @@ RSpec.describe 'Editions', type: :request do
       end
 
       it "redirects to Edition's page" do
-        update_edition
-        expect(response).to redirect_to(edition_path(edition))
+        update_edition.should redirect_to(edition_path(edition))
         follow_redirect!
         expect(response.body).to include('Edition was successfully updated.')
       end
@@ -104,7 +102,7 @@ RSpec.describe 'Editions', type: :request do
 
       it 'renders edit Edition view' do
         update_edition
-        expect(response).to render_template(:edit)
+        response.should render_template(:edit)
       end
 
       it 'returns the corresponding error' do
@@ -127,9 +125,7 @@ RSpec.describe 'Editions', type: :request do
       end
 
       it 'redirects to editions list' do
-        delete_edition
-
-        expect(response).to redirect_to(editions_path)
+        delete_edition.should redirect_to(editions_path)
       end
     end
   end
@@ -149,15 +145,14 @@ RSpec.describe 'Editions', type: :request do
 
       it 'renders new import Edition view' do
         new_import_edition
-        expect(response).to render_template(:new_import)
+        response.should render_template(:new_import)
       end
 
       it "redirect to the Edition's page" do
-        import_edition
-        redirect_to(assigns(:edition))
+        import_edition.should redirect_to(assigns(:edition))
         follow_redirect!
 
-        expect(response).to render_template(:show)
+        response.should render_template(:show)
         expect(response.body).to include('Edition details were imported.')
       end
     end
@@ -167,8 +162,7 @@ RSpec.describe 'Editions', type: :request do
 
       it 'renders new Import Edition view' do
         import_edition
-
-        expect(response).to render_template(:new_import)
+        response.should render_template(:new_import)
       end
     end
   end
