@@ -15,6 +15,10 @@ class Edition < ApplicationRecord
   validates :link, presence: true
   validates :date, presence: true
 
+  validate :unique_month_and_year
+
+  scope :not_deleted, -> { where(deleted: false) }
+
   def import_csv(file)
     rows = CSV.read(file.path, headers: true)
     tasks = find_or_create_tasks(rows.headers[2..4])
@@ -61,5 +65,13 @@ class Edition < ApplicationRecord
         sol.time = time
       end
     end
+  end
+
+  def valid_date?
+    Edition.not_deleted.where.not(id: id).pluck(:date).all? { |d| d.strftime('%Y-%m') != date.strftime('%Y-%m') }
+  end
+
+  def unique_month_and_year
+    errors.add(:date, "can't be duplicated for month and year") unless valid_date?
   end
 end

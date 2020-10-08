@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_192039) do
     t.string "link"
     t.text "description"
     t.date "date"
+    t.boolean "deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_192039) do
     t.string "last_name"
     t.string "link"
     t.bigint "position_id"
+    t.boolean "deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["position_id"], name: "index_participants_on_position_id"
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_192039) do
     t.bigint "edition_id"
     t.integer "total_points", default: 0
     t.string "total_time", default: "00:00:00"
+    t.boolean "deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "rank"
@@ -70,6 +73,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_192039) do
     t.string "short_name"
     t.string "long_name"
     t.text "description"
+    t.boolean "deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -79,6 +83,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_192039) do
     t.bigint "task_id"
     t.integer "points", default: 0
     t.string "time", default: "00:00:00"
+    t.boolean "deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["participation_id"], name: "index_solutions_on_participation_id"
@@ -90,6 +95,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_192039) do
     t.string "author"
     t.text "description"
     t.bigint "edition_id"
+    t.boolean "deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["edition_id"], name: "index_tasks_on_edition_id"
@@ -99,6 +105,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_192039) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
+    t.boolean "deleted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

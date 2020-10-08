@@ -33,4 +33,20 @@ RSpec.describe Edition, type: :model do
       it { expect { edition.import_csv }.to raise_error(StandardError) }
     end
   end
+
+  describe 'validators' do
+    context 'when date is invalid' do
+      let!(:edition) { create(:edition) }
+      let(:edition_2) { build(:edition, date: edition.date) }
+
+      it 'expects to be invalid' do
+        expect(edition_2).not_to be_valid
+      end
+
+      it 'raises duplicate date' do
+        edition_2.valid?
+        expect(edition_2.errors.messages[:date]).to include("can't be duplicated for month and year")
+      end
+    end
+  end
 end

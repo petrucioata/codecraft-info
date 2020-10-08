@@ -7,4 +7,6 @@ class Position < ApplicationRecord
 
   validates :short_name, presence: true
   validates :long_name, presence: true
+
+  scope :not_deleted, -> { where(deleted: false) }
 end

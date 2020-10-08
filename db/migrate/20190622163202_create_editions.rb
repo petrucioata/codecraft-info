@@ -6,6 +6,7 @@ class CreateEditions < ActiveRecord::Migration[5.2]
       t.string :link
       t.text :description
       t.date :date
+      t.boolean :deleted, default: false
 
       t.timestamps
     end

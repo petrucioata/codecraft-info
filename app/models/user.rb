@@ -5,4 +5,6 @@ class User < ApplicationRecord
 
   validates :email, presence: true
   validates :email, uniqueness: true
+
+  scope :not_deleted, -> { where(deleted: false) }
 end

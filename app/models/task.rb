@@ -9,6 +9,7 @@ class Task < ApplicationRecord
 
   validates :name, presence: true
 
+  scope :not_deleted, -> { where(deleted: false) }
   scope :by_edition, ->(edition_id) { where(edition_id: edition_id) if edition_id.present? }
   scope :by_name_or_author, lambda { |text|
     where('name LIKE ? or author LIKE ?', "%#{text}%", "%#{text}%") if text.present?
@@ -19,6 +20,6 @@ class Task < ApplicationRecord
   end
 
   def self.search(params)
-    all.by_name_or_author(params[:searched_text]).by_edition(params[:edition_id])
+    not_deleted.includes(:edition).by_name_or_author(params[:searched_text]).by_edition(params[:edition_id])
   end
 end

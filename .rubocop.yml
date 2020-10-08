@@ -10,6 +10,7 @@ AllCops:
 Metrics/BlockLength:
   Exclude:
     - 'spec/requests/*'
+    - 'spec/models/*'
 
 RSpec/MultipleExpectations:
   Exclude:
@@ -21,9 +22,15 @@ RSpec/ExampleLength:
 
 Metrics/LineLength:
   Max: 120
+
 Style/Documentation:
   Enabled: false
+
 Style/EmptyMethod:
   Enabled: false
+
 Style/BlockComments:
+  Enabled: false
+
+RSpec/LetSetup:
   Enabled: false

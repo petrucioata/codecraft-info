@@ -142,7 +142,11 @@ RSpec.describe 'Participant', type: :request do
     before { login(user.email, password) }
 
     context 'when the participant is find' do
-      it { expect { delete_participant }.to change(Participant, :count).by(-1) }
+      it 'sets deleted to true' do
+        delete_participant
+
+        expect(participant.reload.deleted).to eq true
+      end
 
       it 'redirects to participants list' do
         delete_participant
