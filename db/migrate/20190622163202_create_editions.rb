@@ -1,9 +1,9 @@
 class CreateEditions < ActiveRecord::Migration[5.2]
   def change
     create_table :editions do |t|
-      t.string :name, unique: true
+      t.string :name
       t.string :topic
-      t.string :link, unique: true
+      t.string :link
       t.text :description
       t.date :date
 
