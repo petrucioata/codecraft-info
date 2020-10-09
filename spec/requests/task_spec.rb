@@ -14,12 +14,12 @@ RSpec.describe 'Tasks', type: :request do
 
     it 'returns a successful response' do
       list_tasks
-      expect(response).to be_successful
+      response.should be_successful
     end
 
     it 'renders the index template' do
       list_tasks
-      expect(response).to render_template(:index)
+      response.should render_template(:index)
     end
   end
 
@@ -43,18 +43,17 @@ RSpec.describe 'Tasks', type: :request do
 
       it 'renders new Task view' do
         new_task
-        expect(response).to render_template(:new)
+        response.should render_template(:new)
       end
 
       it { expect { create_task }.to change(Task, :count).by(1) }
       it { expect { create_task }.to change(ActiveStorage::Attachment, :count).by(1) }
 
       it "redirect to the Task's page" do
-        create_task
-        redirect_to(assigns(:task))
+        create_task.should redirect_to redirect_to(assigns(:task))
         follow_redirect!
 
-        expect(response).to render_template(:show)
+        response.should render_template(:show)
         expect(response.body).to include('Task was successfully created')
       end
     end
@@ -64,7 +63,7 @@ RSpec.describe 'Tasks', type: :request do
 
       it 'render new Task view and returns the corresponding error message' do
         create_task
-        expect(response).to render_template(:new)
+        response.should render_template(:new)
         expect(response.body).to include('Name has already been taken')
       end
     end
@@ -79,7 +78,7 @@ RSpec.describe 'Tasks', type: :request do
 
       it 'render new Task view and returns the corresponding error message' do
         create_task
-        expect(response).to render_template(:new)
+        response.should render_template(:new)
         expect(response.body).to include('Name can&#39;t be blank')
       end
     end
@@ -106,8 +105,7 @@ RSpec.describe 'Tasks', type: :request do
       it { expect { update_task }.to change(ActiveStorage::Attachment, :count).by(1) }
 
       it "redirects to Task's page" do
-        update_task
-        expect(response).to redirect_to(task_path(task))
+        update_task.should redirect_to(task_path(task))
         follow_redirect!
 
         expect(response.body).to include('Task was successfully updated')
@@ -122,7 +120,7 @@ RSpec.describe 'Tasks', type: :request do
 
       it 'renders edit Task view' do
         update_task
-        expect(response).to render_template(:edit)
+        response.should render_template(:edit)
       end
 
       it 'returns the corresponding error message' do
@@ -140,14 +138,11 @@ RSpec.describe 'Tasks', type: :request do
     context 'when the task is find' do
       it 'sets deleted to true' do
         delete_task
-
         expect(task.reload.deleted).to eq true
       end
 
       it 'redirects to tasks list' do
-        delete_task
-
-        expect(response).to redirect_to(tasks_path)
+        delete_task.should redirect_to(tasks_path)
       end
     end
   end

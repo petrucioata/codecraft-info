@@ -14,12 +14,12 @@ RSpec.describe 'Participant', type: :request do
 
     it 'returns a successful response' do
       list_participants
-      expect(response).to be_successful
+      response.should be_successful
     end
 
     it 'renders the index template' do
       list_participants
-      expect(response).to render_template(:index)
+      response.should render_template(:index)
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe 'Participant', type: :request do
 
       it 'returns participant data' do
         show
-        expect(response).to render_template(:show)
+        response.should render_template(:show)
         expect(response.body).not_to include('Editions results')
       end
     end
@@ -69,13 +69,12 @@ RSpec.describe 'Participant', type: :request do
     context 'when the required params are provided' do
       it "creates a Participant and redirects to the Participant's page" do
         new_participant
-        expect(response).to render_template(:new)
+        response.should render_template(:new)
 
-        create_participant
-        expect(response).to redirect_to(assigns(:participant))
+        create_participant.should redirect_to(assigns(:participant))
         follow_redirect!
 
-        expect(response).to render_template(:show)
+        response.should render_template(:show)
         expect(response.body).to include('Participant was successfully created.')
       end
     end
@@ -85,7 +84,7 @@ RSpec.describe 'Participant', type: :request do
 
       it 'renders new Edition view and returns the corresponding error' do
         create_participant
-        expect(response).to render_template(:new)
+        response.should render_template(:new)
         expect(response.body).to include('Username has already been taken')
       end
     end
@@ -107,9 +106,7 @@ RSpec.describe 'Participant', type: :request do
       end
 
       it "updates the Participant proporties and redirects to Participant's page" do
-        update_participant
-
-        expect(response).to redirect_to(participant_path(participant))
+        update_participant.should redirect_to(participant_path(participant))
         follow_redirect!
 
         expect(response.body).to include 'Participant was successfully updated'
@@ -130,7 +127,7 @@ RSpec.describe 'Participant', type: :request do
       it 'renders edit participant view and returns the corresponding error' do
         update_participant
 
-        expect(response).to render_template(:edit)
+        response.should render_template(:edit)
         expect(response.body).to include('Username has already been taken')
       end
     end
@@ -149,9 +146,7 @@ RSpec.describe 'Participant', type: :request do
       end
 
       it 'redirects to participants list' do
-        delete_participant
-
-        expect(response).to redirect_to(participants_path)
+        delete_participant.should redirect_to(participants_path)
       end
     end
   end

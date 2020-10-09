@@ -58,6 +58,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'chromedriver-helper'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 4.0'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'simplecov', require: false
 end

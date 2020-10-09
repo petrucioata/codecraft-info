@@ -34,18 +34,31 @@ RSpec.describe Edition, type: :model do
     end
   end
 
-  describe 'validators' do
-    context 'when date is invalid' do
-      let!(:edition) { create(:edition) }
-      let(:edition_2) { build(:edition, date: edition.date) }
+  describe 'associations' do
+    it { should have_many(:participations).dependent(:destroy) }
+    it { should have_many(:participants).through(:participations) }
+    it { should have_many(:tasks).dependent(:nullify) }
+  end
 
-      it 'expects to be invalid' do
-        expect(edition_2).not_to be_valid
-      end
+  describe 'validations' do
+    subject { build(:edition) }
+
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:link) }
+    it { should validate_presence_of(:date) }
+    it { should validate_uniqueness_of(:name) }
+    it { should validate_uniqueness_of(:link) }
+
+    context 'when date is invalid' do
+      before { create(:edition, date: Time.zone.today) }
+
+      let(:edition) { build(:edition, date: Time.zone.today) }
+
+      it { edition.should be_invalid }
 
       it 'raises duplicate date' do
-        edition_2.valid?
-        expect(edition_2.errors.messages[:date]).to include("can't be duplicated for month and year")
+        edition.valid?
+        edition.errors.messages[:date].should eq(["can't be duplicated for month and year"])
       end
     end
   end
