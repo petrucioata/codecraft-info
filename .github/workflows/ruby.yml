@@ -15,10 +15,24 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
 
     steps:
+    - name: Shutdown Ubuntu MySQL
+      run: sudo service mysql stop
+
+    - name: Set up MySQL
+      uses: mirromutth/mysql-action@v1.1
+      with:
+        host port: 3306
+        container port: 3306
+        character set server: 'utf8'
+        collation server: 'utf8_general_ci'
+        mysql database: 'codecraft_test'
+        mysql root password: 'root'
+        mysql user: 'root'
+        mysql password: 'root'
+
     - uses: actions/checkout@v2
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
@@ -26,8 +40,20 @@ jobs:
     # uses: ruby/setup-ruby@v1
       uses: ruby/setup-ruby@ec106b438a1ff6ff109590de34ddc62c540232e0
       with:
-        ruby-version: 2.6
+        ruby-version: 2.6.3
+
     - name: Install dependencies
       run: bundle install
+
+    - name: Start Ubuntu MySQL
+      run: sudo service mysql start
+
+    - name: Setup test database
+      env:
+        RAILS_ENV: test
+        TEST_DATABASE: 'codecraft_test'
+      run: |
+        bin/rails db:setup
+
     - name: Run tests
-      run: bundle exec rake
+      run: bundle exec rspec
