@@ -6,8 +6,8 @@ RSpec.describe 'Dashboard', type: :request do
   subject(:dashboard) { get root_path }
 
   context 'when dashboard page is displayed' do
-    let!(:edition) { create(:edition, :with_participants, count: 5) }
     let!(:position) { create(:position) }
+    let!(:edition) { create(:edition, :with_participants, count: 5, position: position) }
     let(:participations) { create_list(:participation, 4, :with_participant, position: position.id, edition: edition) }
 
     before { dashboard }
