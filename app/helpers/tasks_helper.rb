@@ -2,6 +2,8 @@
 
 module TasksHelper
   def markdown(text)
+    return if text.blank?
+
     renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
     options = {
       autolink: true,
