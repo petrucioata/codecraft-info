@@ -1,6 +1,5 @@
 <script>
 am4core.ready(function() {
-
 // Themes begin
 am4core.useTheme(am4themes_animated);
 // Themes end
@@ -13,7 +12,6 @@ var title = chart_pie.titles.create();
 title.text = "Percentage of participants by level";
 title.fontSize = 20;
 title.marginBottom = 30;
-
 
 // Add data from controller
 chart_pie.data = <%= raw data.to_json %>;

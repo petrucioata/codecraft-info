@@ -8,7 +8,7 @@ RSpec.describe 'Dashboard', type: :request do
   context 'when dashboard page is displayed' do
     let!(:position) { create(:position) }
     let!(:edition) { create(:edition, :with_participants, count: 5, position: position) }
-    let(:participations) { create_list(:participation, 4, :with_participant, position: position.id, edition: edition) }
+    let(:participations) { create_list(:participation, 4, :with_participant, position: position, edition: edition) }
 
     before { dashboard }
 
