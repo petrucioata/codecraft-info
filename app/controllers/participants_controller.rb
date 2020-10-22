@@ -12,8 +12,8 @@ class ParticipantsController < ApplicationController
 
   # GET /participants/:id
   def show
-    @participations = @participant.participations.paginate(page: params[:page])
-    @chart_data = @participations.includes(:edition).map do |participation|
+    @participations = @participant.participations.not_deleted.paginate(page: params[:page])
+    @chart_data = @participations.includes(:edition).reverse.map do |participation|
       { number: participation.total_points, name: participation.edition.name }
     end
   end
