@@ -13,10 +13,6 @@ Metrics/BlockLength:
     - 'spec/models/*'
     - 'spec/routes/*'
 
-Metrics/MethodLength:
-  Exclude:
-    - 'app/helpers/tasks_helper.rb'
-
 RSpec/MultipleExpectations:
   Exclude:
     - 'spec/requests/*'

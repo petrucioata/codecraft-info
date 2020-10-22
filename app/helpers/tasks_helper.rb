@@ -5,7 +5,11 @@ module TasksHelper
     return if text.blank?
 
     renderer = Redcarpet::Render::HTML.new(hard_wrap: true)
-    options = {
+    sanitize(Redcarpet::Markdown.new(renderer, markdown_options).render(text))
+  end
+
+  def markdown_options
+    {
       autolink: true,
       no_intra_emphasis: true,
       fenced_code_blocks: true,
@@ -13,6 +17,5 @@ module TasksHelper
       strikethrough: true,
       superscript: true
     }
-    sanitize(Redcarpet::Markdown.new(renderer, options).render(text))
   end
 end
