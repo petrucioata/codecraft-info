@@ -2,7 +2,7 @@
 
 class Participation < ApplicationRecord
   belongs_to :participant
-  belongs_to :edition
+  belongs_to :edition, counter_cache: true
   has_many :solutions, dependent: :nullify
 
   validates :total_points, numericality: { only_integer: true }

@@ -17,7 +17,7 @@ class Edition < ApplicationRecord
 
   validate :unique_month_and_year
 
-  scope :not_deleted, -> { where(deleted: false) }
+  scope :not_deleted, -> { where(deleted: false).order(date: :desc) }
 
   def import_csv(file)
     rows = CSV.read(file.path, headers: true)

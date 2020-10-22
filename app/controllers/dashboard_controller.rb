@@ -10,20 +10,25 @@ class DashboardController < ApplicationController
   private
 
   def participants_per_edition
-    Edition.not_deleted.order(:date).each_with_object([]) do |edition, data|
+    Participation.all.includes(:edition)
+                 .reject { |participation| participation.edition.deleted }
+                 .group_by { |participation| participation.edition.date.strftime('%b%y') }
+                 .each_with_object([]) do |(key, value), data|
       data << {
-        name: edition.date.strftime('%b%y'),
-        number: edition.participants.count,
-        with_points: edition.participations.with_points
+        name: key,
+        number: value.count,
+        with_points: value.count { |participation| participation.total_points.positive? }
       }
     end
   end
 
   def implication_level
-    Position.not_deleted.each_with_object([]) do |position, data|
+    Participant.not_deleted.includes(:position)
+               .group_by { |participant| participant.position&.short_name }
+               .transform_values(&:count).each_with_object([]) do |(short_name, count), data|
       data << {
-        position: position.short_name,
-        value: position.participants.joins(:participations).count
+        position: short_name,
+        value: count
       }
     end
   end

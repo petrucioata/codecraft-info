@@ -13,10 +13,11 @@ FactoryBot.define do
     trait :with_participants do
       transient do
         count { 1 }
+        position { create(:position) }
       end
 
       after(:create) do |edition, evaluator|
-        create_list(:participant, evaluator.count, editions: [edition])
+        create_list(:participant, evaluator.count, position: evaluator.position, editions: [edition])
       end
     end
   end

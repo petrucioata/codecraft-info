@@ -13,7 +13,7 @@
       <td><%= link_to edition.name, edition.link, target: '_blank' %></td>
       <td><%= edition.topic %></td>
       <td><%= romanian_format(edition.date) %></td>
-      <td><%= edition.participants.size %></td>
+      <td><%= edition.participations.size %></td>
       <td>
         <%= link_to 'Show', edition_path(edition), class: 'btn btn-primary' %>
         <% if current_user %>
