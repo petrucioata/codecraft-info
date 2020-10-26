@@ -11,9 +11,9 @@
   <div class='row'>
     <div class='col-xs-6'>
       <%= render 'charts/simple_column',
-        data: @participants_per_edition,
+        data: @average_points_per_edition,
         chart_id: "chart_simple_column",
-        value: { name: "name", number: "number", title: "No. participants" }
+        value: { name: "name", number: "number", title: "Average points per edition" }
       %>
       <div id="chart_simple_column" style="width: 90%; height: 300px;"></div>
     </div>
@@ -26,5 +26,10 @@
       %>
       <div id="chart_simple_pie" style="width: 90%; height: 300px;"></div>
     </div>
+  </div>
+
+  <div class = 'row'>
+      <%= render 'partials/places_table', data: @first_five_places%>
+      <div id="chart_bar_chart" style="height: 900px;"></div>
   </div>
 </div>
