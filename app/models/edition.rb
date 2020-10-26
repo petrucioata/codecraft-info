@@ -6,6 +6,8 @@ class Edition < ApplicationRecord
   has_many :participations, dependent: :destroy
   has_many :participants, through: :participations
 
+  has_many :participations_with_points, -> { with_points }, class_name: 'Participation', inverse_of: :edition
+
   has_many :tasks, dependent: :nullify
 
   validates :name, uniqueness: true
@@ -31,6 +33,10 @@ class Edition < ApplicationRecord
   rescue StandardError => e
     e.message
     false
+  end
+
+  def month_and_year
+    date.strftime('%b%y')
   end
 
   private
