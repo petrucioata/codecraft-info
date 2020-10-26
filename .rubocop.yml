@@ -13,6 +13,10 @@ Metrics/BlockLength:
     - 'spec/models/*'
     - 'spec/routes/*'
 
+Metrics/MethodLength:
+  Exclude:
+    - 'app/controllers/dashboard_controller.rb'
+
 RSpec/MultipleExpectations:
   Exclude:
     - 'spec/requests/*'
