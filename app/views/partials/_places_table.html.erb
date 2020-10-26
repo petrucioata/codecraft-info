@@ -1,0 +1,41 @@
+<table class='table'>
+  <thead class='thead-dark'>
+  <tr>
+    <th>Edition</th>
+    <th colspan="2">First place</th>
+    <th colspan="2">Second place</th>
+    <th colspan="2">Third place</th>
+    <th colspan="2">Fourth place</th>
+    <th colspan="2">Fifth place</th>
+  </tr>
+  <tr>
+    <th></th>
+    <th>Username</th>
+    <th>Points</th>
+    <th>Username</th>
+    <th>Points</th>
+    <th>Username</th>
+    <th>Points</th>
+    <th>Username</th>
+    <th>Points</th>
+    <th>Username</th>
+    <th>Points</th>
+  </tr>
+  </thead>
+  <% @first_five_places.each do |places| %>
+    <tr>
+      <td><%=places[:year]%></td>
+      <td><%=places[:first_place_username]%></td>
+      <td><%=places[:first_place_points]%></td>
+      <td><%=places[:second_place_username]%></td>
+      <td><%=places[:seccond_place_points]%></td>
+      <td><%=places[:third_place_username]%></td>
+      <td><%=places[:third_place_points]%></td>
+      <td><%=places[:fourth_place_username]%></td>
+      <td><%=places[:fourth_place_points]%></td>
+      <td><%=places[:fifth_place_username]%></td>
+      <td><%=places[:fifth_place_points]%></td>
+
+    </tr>
+  <% end %>
+</table>
