@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
+require 'will_paginate/array'
+
 class DashboardController < ApplicationController
-  # GET /
   def index
     @participants_per_edition = participants_per_edition
     @implication_level = implication_level
     @average_points_per_edition = average_points_per_edition
-    @first_five_places = first_places
+    @first_places_per_edition = first_places.paginate(page: params[:page], per_page: 12)
   end
 
   private
@@ -17,35 +18,24 @@ class DashboardController < ApplicationController
     end
   end
 
-  def first_five_points(edition)
-    edition.participations.first(5).map(&:total_points)
+  def points_for_first(edition, places: 5)
+    edition.participations.first(places).map(&:total_points)
   end
 
-  def first_five_participants(edition)
-    edition.participants.first(5).map(&:username)
+  def names_of_first(edition, places: 5)
+    edition.participants.first(places).map(&:full_name)
   end
 
   def compute_values(edition)
-    points = first_five_points(edition)
-    participants = first_five_participants(edition)
     {
-      year: edition.month_and_year,
-      first_place_points: points[0],
-      second_place_points: points[1],
-      third_place_points: points[2],
-      fourth_place_points: points[3],
-      fifth_place_points: points[4],
-      first_place_username: participants[0],
-      second_place_username: participants[1],
-      third_place_username: participants[2],
-      fourth_place_username: participants[3],
-      fifth_place_username: participants[4]
+      edition_date: edition.month_and_year,
+      points_of_first: points_for_first(edition),
+      names_of_first: names_of_first(edition)
     }
   end
 
   def average_points_per_edition
     Edition.not_deleted.includes(:participations_with_points).each_with_object([]) do |edition, data|
-      # participation_with_points = edition.participations.with_points
       data << {
         name: edition.month_and_year,
         number: calculate_average(edition.participations_with_points)

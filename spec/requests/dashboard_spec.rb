@@ -17,7 +17,7 @@ RSpec.describe 'Dashboard', type: :request do
     it { expect(response.body).to include(edition.participants.count.to_s) }
     it { expect(response.body).to include(position.short_name) }
     it { expect(response.body).to include(position.participants.joins(:participations).count.to_s) }
-    it { expect(response.body).to include(edition.participants.first.username) }
+    it { expect(response.body).to include(edition.participants.first.full_name) }
     it { expect(response.body).to include(edition.participations.first.total_points.to_s) }
   end
 end

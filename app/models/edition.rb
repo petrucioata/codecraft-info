@@ -36,7 +36,7 @@ class Edition < ApplicationRecord
   end
 
   def month_and_year
-    date.strftime('%b%y')
+    date.strftime('%b %y')
   end
 
   private

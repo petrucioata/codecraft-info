@@ -1,41 +1,33 @@
-<table class='table'>
-  <thead class='thead-dark'>
-  <tr>
-    <th>Edition</th>
-    <th colspan="2">First place</th>
-    <th colspan="2">Second place</th>
-    <th colspan="2">Third place</th>
-    <th colspan="2">Fourth place</th>
-    <th colspan="2">Fifth place</th>
-  </tr>
-  <tr>
-    <th></th>
-    <th>Username</th>
-    <th>Points</th>
-    <th>Username</th>
-    <th>Points</th>
-    <th>Username</th>
-    <th>Points</th>
-    <th>Username</th>
-    <th>Points</th>
-    <th>Username</th>
-    <th>Points</th>
-  </tr>
-  </thead>
-  <% @first_five_places.each do |places| %>
-    <tr>
-      <td><%=places[:year]%></td>
-      <td><%=places[:first_place_username]%></td>
-      <td><%=places[:first_place_points]%></td>
-      <td><%=places[:second_place_username]%></td>
-      <td><%=places[:seccond_place_points]%></td>
-      <td><%=places[:third_place_username]%></td>
-      <td><%=places[:third_place_points]%></td>
-      <td><%=places[:fourth_place_username]%></td>
-      <td><%=places[:fourth_place_points]%></td>
-      <td><%=places[:fifth_place_username]%></td>
-      <td><%=places[:fifth_place_points]%></td>
+<% unless @first_places_per_edition.blank? %>
+  <table class='table'>
+    <thead class='thead-dark'>
+      <tr>
+        <th>Places</th>
+        <% (0...@first_places_per_edition.first[:points_of_first].size).each do |i| %>
+          <th colspan="2"><%= i + 1 %></th>
+        <% end %>
+      </tr>
+      <tr>
+        <th>Edition</th>
+        <% (@first_places_per_edition.first[:points_of_first].size).times do %>
+          <th>Name</th>
+          <th>Points</th>
+        <% end %>
+      </tr>
+    </thead>
+    <% @first_places_per_edition.each do |places| %>
+      <tr>
+          <td><%= places[:edition_date] %></td>
+          <% (0...places[:points_of_first].size).each do |i| %>
+            <td><%= places[:names_of_first][i] %></td>
+            <td><%= places[:points_of_first][i] %></td>
+          <% end %>
+      </tr>
+    <% end %>
+  </table>
 
-    </tr>
-  <% end %>
-</table>
+  <div class='text-center'>
+    <%= will_paginate @first_places_per_edition, renderer: BootstrapPagination::Rails,
+                      :previous_label => '<<', :next_label => '>>' %>
+  </div>
+<% end %>
