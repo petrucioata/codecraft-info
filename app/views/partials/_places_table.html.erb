@@ -1,0 +1,33 @@
+<% unless @first_places_per_edition.blank? %>
+  <table class='table'>
+    <thead class='thead-dark'>
+      <tr>
+        <th>Places</th>
+        <% (0...@first_places_per_edition.first[:points_of_first].size).each do |i| %>
+          <th colspan="2"><%= i + 1 %></th>
+        <% end %>
+      </tr>
+      <tr>
+        <th>Edition</th>
+        <% (@first_places_per_edition.first[:points_of_first].size).times do %>
+          <th>Name</th>
+          <th>Points</th>
+        <% end %>
+      </tr>
+    </thead>
+    <% @first_places_per_edition.each do |places| %>
+      <tr>
+          <td><%= places[:edition_date] %></td>
+          <% (0...places[:points_of_first].size).each do |i| %>
+            <td><%= places[:names_of_first][i] %></td>
+            <td><%= places[:points_of_first][i] %></td>
+          <% end %>
+      </tr>
+    <% end %>
+  </table>
+
+  <div class='text-center'>
+    <%= will_paginate @first_places_per_edition, renderer: BootstrapPagination::Rails,
+                      :previous_label => '<<', :next_label => '>>' %>
+  </div>
+<% end %>
