@@ -6,9 +6,9 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-  Ruby: `2.6.3`
-  Create and use the gemset: `rvm use 2.6.3@codecraft [--create]`
-  Rails: `5.2.3`
+  Ruby: `2.7.4`
+  Create and use the gemset: `rvm use 2.7.4@codecraft [--create]`
+  Rails: `6.1.7`
 
 * System dependencies
   `MySQL`
@@ -31,6 +31,5 @@ Things you may want to cover:
 
   Open `coverage/index.html` in a browser to see a detailed report of app's coverage
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+* Admin access
+  For admin access go to `/admin` and log in with your admin credentials.
