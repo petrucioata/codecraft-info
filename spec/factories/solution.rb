@@ -3,8 +3,8 @@
 FactoryBot.define do
   factory :solution do
     participation
-    task
-    points { Faker::Number.between(0, 300) }
+    task_id { create(:task, :for_edition).id }
+    points { Faker::Number.between(from: 0, to: 300) }
 
     trait :with_participation do
       before(:create) do |solution, _evaluator|

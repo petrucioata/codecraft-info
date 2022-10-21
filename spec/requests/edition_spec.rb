@@ -5,8 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Editions', type: :request do
   let!(:edition) { create(:edition) }
   let(:other_edition) { create(:edition) }
-  let(:password) { 'pass123' }
-  let!(:user) { create(:user, password: password) }
+  let!(:user) { create(:user, password: 'pass123') }
 
   describe 'lists all editions' do
     subject(:list_editions) { get editions_path }
@@ -25,19 +24,20 @@ RSpec.describe 'Editions', type: :request do
   describe 'creates a new Edition' do
     subject(:create_edition) { post editions_path, params: { edition: params } }
 
-    before { login(user.email, password) }
+    before { login(user.email, user.password) }
 
     let(:new_edition) { get new_edition_path }
-    let(:params) do
-      {
-        "name": Faker::App.name,
-        "link": Faker::Internet.url('codefights.com'),
-        "date": Time.zone.today,
-        "description": Faker::Lorem.sentence
-      }
-    end
 
     context 'when the required params are provided' do
+      let(:params) do
+        {
+          "name": Faker::App.name,
+          "link": Faker::Internet.url(host: 'codefights.com'),
+          "date": Time.zone.today,
+          "description": Faker::Lorem.sentence
+        }
+      end
+
       it 'renders new Edition view' do
         new_edition
         response.should render_template(:new)
@@ -76,7 +76,7 @@ RSpec.describe 'Editions', type: :request do
       patch edition_path(edition), params: { edition: params }
     end
 
-    before { login(user.email, password) }
+    before { login(user.email, user.password) }
 
     context 'when the params are correct' do
       let(:params) do
@@ -115,7 +115,7 @@ RSpec.describe 'Editions', type: :request do
   describe 'deletes an Edition' do
     subject(:delete_edition) { delete edition_path(edition) }
 
-    before { login(user.email, password) }
+    before { login(user.email, user.password) }
 
     context 'when the edition is find' do
       it 'sets deleted to true' do
@@ -135,13 +135,12 @@ RSpec.describe 'Editions', type: :request do
       post import_edition_path(edition), params: { file: Rack::Test::UploadedFile.new(file) }
     end
 
-    before { login(user.email, password) }
+    before { login(user.email, user.password) }
 
     let(:new_import_edition) { get new_import_edition_path(edition) }
-    let(:file) { fixture_file_upload(file_name) }
 
     context 'when the import is successfully made' do
-      let(:file_name) { 'well_formatted.csv' }
+      let(:file) { fixture_file_upload('well_formatted.csv') }
 
       it 'renders new import Edition view' do
         new_import_edition
@@ -158,7 +157,7 @@ RSpec.describe 'Editions', type: :request do
     end
 
     context 'when the edition is not defined' do
-      let(:file_name) { 'malformatted.csv' }
+      let(:file) { fixture_file_upload('malformatted.csv') }
 
       it 'renders new Import Edition view' do
         import_edition

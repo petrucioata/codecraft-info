@@ -5,9 +5,7 @@ class Task < ApplicationRecord
   has_many :solutions, dependent: :destroy
   has_many_attached :test_cases
 
-  validates :name, uniqueness: true
-
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   scope :not_deleted, -> { where(deleted: false) }
   scope :by_edition, ->(edition_id) { where(edition_id: edition_id) if edition_id.present? }

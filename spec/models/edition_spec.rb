@@ -46,8 +46,8 @@ RSpec.describe Edition, type: :model do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:link) }
     it { should validate_presence_of(:date) }
-    it { should validate_uniqueness_of(:name) }
-    it { should validate_uniqueness_of(:link) }
+    it { should validate_uniqueness_of(:name).ignoring_case_sensitivity }
+    it { should validate_uniqueness_of(:link).ignoring_case_sensitivity }
 
     context 'when date is invalid' do
       before { create(:edition, date: Time.zone.today) }

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :task do
-    name { Faker::Lorem.words(2).join('_') }
+    name { Faker::Lorem.words(number: 2).join('_') }
     author { Faker::FunnyName.name }
     description { Faker::Quote.yoda }
 

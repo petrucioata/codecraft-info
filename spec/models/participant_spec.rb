@@ -11,7 +11,7 @@ RSpec.describe Participant, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:username) }
-    it { should validate_uniqueness_of(:username) }
+    it { should validate_uniqueness_of(:username).ignoring_case_sensitivity }
   end
 
   describe '.position_name' do

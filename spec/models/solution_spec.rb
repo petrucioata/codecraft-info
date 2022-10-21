@@ -9,7 +9,7 @@ RSpec.describe Solution, type: :model do
   end
 
   describe 'validations' do
-    subject { build(:solution) }
+    subject { create(:solution) }
 
     it { should validate_numericality_of(:points).only_integer }
     it { should validate_uniqueness_of(:participation_id).scoped_to(:task_id) }

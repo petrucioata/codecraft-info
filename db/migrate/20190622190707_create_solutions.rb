@@ -9,5 +9,6 @@ class CreateSolutions < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    add_index :solutions, [:participation_id, :task_id], unique: true
   end
 end
