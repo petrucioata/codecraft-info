@@ -6,9 +6,8 @@ class Edition < ApplicationRecord
   has_many :participations, dependent: :destroy
   has_many :participants, through: :participations
 
-  has_many :participations_with_points, lambda {
-                                          with_points
-                                        }, class_name: 'Participation', inverse_of: :edition, dependent: :destroy
+  has_many :participations_with_points, -> { with_points }, class_name: 'Participation',
+                                                            inverse_of: :edition, dependent: :destroy
 
   has_many :tasks, dependent: :nullify
 
