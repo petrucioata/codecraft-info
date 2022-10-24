@@ -8,8 +8,8 @@ RSpec.describe Position, type: :model do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:short_name) }
     it { should validate_presence_of(:long_name) }
-    it { should validate_uniqueness_of(:short_name) }
+    it { should validate_presence_of(:short_name) }
+    it { should validate_uniqueness_of(:short_name).ignoring_case_sensitivity }
   end
 end

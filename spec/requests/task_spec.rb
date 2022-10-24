@@ -4,10 +4,9 @@ require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :request do
   let!(:task) { create(:task, :for_edition) }
-  let(:password) { 'pass123' }
-  let!(:user) { create(:user, password: password) }
-  let(:file_name) { 'test_case.txt' }
-  let(:file) { fixture_file_upload(file_name, 'text') }
+  let(:other_task) { create(:task) }
+  let!(:user) { create(:user, password: 'pass123') }
+  let(:file) { fixture_file_upload('test_case.txt', 'text') }
 
   describe 'lists all tasks' do
     subject(:list_tasks) { get tasks_path }
@@ -26,7 +25,7 @@ RSpec.describe 'Tasks', type: :request do
   describe 'create a new Task' do
     subject(:create_task) { post tasks_path, params: { task: params } }
 
-    before { login(user.email, password) }
+    before { login(user.email, user.password) }
 
     let(:params) do
       {
@@ -87,16 +86,16 @@ RSpec.describe 'Tasks', type: :request do
   describe 'updates a Task' do
     subject(:update_task) { patch task_path(task), params: { task: params } }
 
-    before { login(user.email, password) }
+    before { login(user.email, user.password) }
+
+    let(:params) do
+      {
+        "name": Faker::Lorem.sentence,
+        "test_cases": [Rack::Test::UploadedFile.new(file)]
+      }
+    end
 
     context 'when the params are correct' do
-      let(:params) do
-        {
-          "name": Faker::Lorem.sentence,
-          "test_cases": [Rack::Test::UploadedFile.new(file)]
-        }
-      end
-
       it 'updates the task' do
         update_task
         expect(task.reload.name).to eq params[:name]
@@ -113,10 +112,7 @@ RSpec.describe 'Tasks', type: :request do
     end
 
     context 'when some parameters are wrong' do
-      let(:other_task) { create(:task) }
-      let(:params) do
-        { "name": other_task.name }
-      end
+      before { params[:name] = other_task.name }
 
       it 'renders edit Task view' do
         update_task
@@ -133,7 +129,7 @@ RSpec.describe 'Tasks', type: :request do
   describe 'deletes a Task' do
     subject(:delete_task) { delete task_path(task) }
 
-    before { login(user.email, password) }
+    before { login(user.email, user.password) }
 
     context 'when the task is find' do
       it 'sets deleted to true' do

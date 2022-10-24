@@ -10,5 +10,6 @@ class CreateParticipants < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+    add_index :participants, :username, unique: true
   end
 end

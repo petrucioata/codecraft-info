@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby '2.7.4'
 
 gem 'bcrypt'
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -13,10 +13,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'mysql2'
 gem 'puma', '~> 5.6'
-gem 'rails', '~> 5.2.4'
+gem 'rails', '~> 6.1.7'
 gem 'redcarpet'
-gem 'sass-rails', '~> 5.0'
 gem 'sassc-rails'
+gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
@@ -29,12 +29,13 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rails-controller-testing'
-  gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-rails'
 
-  gem 'rubocop', '~> 0.72.0'
-  gem 'rubocop-performance', '~> 1.4'
-  gem 'rubocop-rails', '~> 2.1'
-  gem 'rubocop-rspec', '~> 1.33'
+  gem 'rubocop'
+  gem 'rubocop-faker'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
 end
 
 group :development do
@@ -55,10 +56,10 @@ end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'chromedriver-helper'
+  gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'shoulda-matchers', '~> 4.0'
+  gem 'shoulda-matchers'
+  gem 'webdrivers'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'simplecov', require: false
 end
